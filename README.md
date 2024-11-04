@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # intelligent_tutoring_system
 
 A new Flutter project.
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# intelligent_tutoring_system
+>>>>>>> b06aa2e7a5a76c88fae2a55ac25a2d8f803d40d3
