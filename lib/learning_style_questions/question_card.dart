@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
-class QuestionWidget extends StatefulWidget {
+class QuestionCard extends StatefulWidget {
   final List<String> questions;
 
-  QuestionWidget({required this.questions});
+  const QuestionCard({super.key, required this.questions});
 
   @override
-  State<QuestionWidget> createState() => _QuestionWidgetState();
+  State<QuestionCard> createState() => _QuestionCardState();
 }
 
-class _QuestionWidgetState extends State<QuestionWidget> {
+class _QuestionCardState extends State<QuestionCard> {
   int activeTotal = 0;
   int reflectiveTotal = 0;
   int currentQuestionIndex = 0;
@@ -33,14 +32,12 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 onPressed: () => Navigator.pop(context),
                 child: Text("إغلاق"),
               ),
-
             ],
           ),
         );
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Card(
