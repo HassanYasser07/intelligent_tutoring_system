@@ -6,9 +6,9 @@ class QuestionsApiServices {
   final Dio _dio = Dio();
 
   // دالة لجلب الأسئلة من API وتحليلها إلى قائمة من كائنات Question
-  Future<List<QuestionModell>> fetchQuestions() async {
+  Future<List<QuestionModell>> fetchQuestions(String dimension) async {
     try {
-      final response = await _dio.get('http://192.168.1.60:3000/questions/active&reflective'); // استبدل 'https://your-api-url.com/questions' بالرابط الفعلي للـ API
+      final response = await _dio.get('http://192.168.1.60:3000/questions/'); // استبدل 'https://your-api-url.com/questions' بالرابط الفعلي للـ API
       final List data = response.data as List;
       return data.map((json) => QuestionModell.fromJson(json)).toList();
     } catch (e) {
@@ -16,4 +16,17 @@ class QuestionsApiServices {
       return [];
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

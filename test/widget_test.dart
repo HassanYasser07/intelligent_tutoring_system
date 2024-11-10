@@ -7,13 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intelligent_tutoring_system/fetures/learning_style_questions/active_and_reflective_questions/presentation/intelligent_tutoring_app.dart';
 
 import 'package:intelligent_tutoring_system/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const IntelligentTutoringApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

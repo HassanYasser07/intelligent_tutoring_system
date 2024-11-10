@@ -18,7 +18,7 @@ abstract class Routes {
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
           return  BlocProvider(
-            create: (context) => QuestionCubit(QuestionsApiServices())..fetchQuestions(), // استبدل [] بالبيانات الفعلية إذا كنت تحتاجها
+            create: (context) => QuestionCubit(QuestionsApiServices())..fetchQuestions(''), // استبدل [] بالبيانات الفعلية إذا كنت تحتاجها
             child: QuestionWidget(),
           );
         },

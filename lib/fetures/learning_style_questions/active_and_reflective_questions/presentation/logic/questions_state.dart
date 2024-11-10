@@ -49,8 +49,9 @@ class QuestionLoading extends QuestionState {}
 class QuestionLoaded extends QuestionState {
   final List<QuestionModell> questions;
   final int currentQuestionIndex;
+  final String dimension;
 
-  const QuestionLoaded(this.questions, {this.currentQuestionIndex = 0});
+  const QuestionLoaded(this.questions, this.dimension, {this.currentQuestionIndex = 0});
 
   @override
   List<Object> get props => [questions, currentQuestionIndex];
@@ -59,6 +60,7 @@ class QuestionLoaded extends QuestionState {
   QuestionLoaded copyWith({int? currentQuestionIndex}) {
     return QuestionLoaded(
       questions,
+      dimension,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
     );
   }
@@ -75,9 +77,15 @@ class QuestionError extends QuestionState {
 class QuestionResult extends QuestionState {
   final int activeScore;
   final int reflectiveScore;
+  final int sensingScore;
+  final int intuitiveScore;
+  final int sequentialScore;
+  final int globalScore;
+  final int visualScore;
+  final int verbalScore;
 
-  const QuestionResult(this.activeScore, this.reflectiveScore);
+  const QuestionResult(this.activeScore, this.reflectiveScore, this.visualScore, this.verbalScore, this.sequentialScore, this.globalScore, this.intuitiveScore, this.sensingScore);
 
   @override
-  List<Object> get props => [activeScore, reflectiveScore];
+  List<Object> get props => [activeScore, reflectiveScore,visualScore,verbalScore,sequentialScore,globalScore,intuitiveScore,sensingScore];
 }

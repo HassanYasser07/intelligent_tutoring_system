@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/api_services/question_api_service.dart';
+import '../../data/models/modeeeel.dart';
 import '../logic/questions_cubit.dart';
 import '../logic/questions_state.dart';
 
 class QuestionScreen extends StatelessWidget {
+
   final List<Map<String, int>> scoreOptions = [
     {'active': 100, 'reflective': 0},
     {'active': 75, 'reflective': 25},
@@ -13,10 +15,11 @@ class QuestionScreen extends StatelessWidget {
     {'active': 0, 'reflective': 100},
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => QuestionCubit(QuestionsApiServices())..fetchQuestions(),
+      create: (context) => QuestionCubit(QuestionsApiServices())..fetchQuestions(''),
       child: Scaffold(
         appBar: AppBar(title: Text('Questions')),
         body: BlocBuilder<QuestionCubit, QuestionState>(
@@ -49,11 +52,12 @@ class QuestionScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(5, (index) {
-                            final activeValue = scoreOptions[index]['active']!;
-                            final reflectiveValue = scoreOptions[index]['reflective']!;
+                            final scoreValue1 = scoreOptions[index]['active']!;
+                            final scoreValue2 = scoreOptions[index]['reflective']!;
+                            String dimension = question.dimension; // ضع البُعد المناسب هنا
                             return IconButton(
                               onPressed: () {
-                                context.read<QuestionCubit>().nextQuestion(activeValue, reflectiveValue);
+                                context.read<QuestionCubit>().nextQuestion(scoreValue1, scoreValue2,dimension);
                               },
                               icon: Icon(Icons.circle, size: 10 + (index * 8)),
                             );
@@ -74,7 +78,21 @@ class QuestionScreen extends StatelessWidget {
             } else if (state is QuestionResult) {
               return Center(
                 child: Text(
-                  'Final Results:\nActive Score: ${state.activeScore}\nReflective Score: ${state.reflectiveScore}',
+                  'Final Results:\n'
+
+                      'Active Score: ${state.activeScore}\n'
+                      'Reflective Score: ${state.reflectiveScore}\n'
+
+                      'Intuitive Score: ${state.intuitiveScore}\n'
+                      'sensing Score: ${state.sensingScore}\n'
+
+                      'Sequential Score: ${state.sequentialScore}\n'
+                      'Global Score: ${state.globalScore}\n'
+
+                      'Visual Score: ${state.visualScore}\n'
+                      'Verbal Score : ${state.verbalScore}\n'
+
+                  ,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),

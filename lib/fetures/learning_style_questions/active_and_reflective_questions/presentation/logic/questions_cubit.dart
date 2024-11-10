@@ -6,26 +6,41 @@ class QuestionCubit extends Cubit<QuestionState> {
   final QuestionsApiServices apiService;
   int activeScore = 0;
   int reflectiveScore = 0;
+  int visualScore = 0;
+  int verbalScore = 0;
+  int sequentialScore = 0;
+  int globalScore = 0;
+  int intuitiveScore = 0;
+  int sensingScore = 0;
 
   QuestionCubit(this.apiService) : super(QuestionInitial());
 
-  Future<void> fetchQuestions() async {
+  Future<void> fetchQuestions(String dimension) async {
     try {
       emit(QuestionLoading());
-      final questions = await apiService.fetchQuestions();
-      emit(QuestionLoaded(questions));
+      final questions = await apiService.fetchQuestions(dimension);
+      emit(QuestionLoaded(questions, dimension));
     } catch (e) {
-      emit(QuestionError("Failed to load questions"));
+      emit(const QuestionError("Failed to load questions"));
     }
   }
 
-  void nextQuestion(int activeValue, int reflectiveValue) {
+  void nextQuestion(int scoreValue1, int scoreValue2, String dimension) {
     if (state is QuestionLoaded) {
       final currentState = state as QuestionLoaded;
-
-      // إضافة القيم للاختيارات الحالية
-      activeScore += activeValue;
-      reflectiveScore += reflectiveValue;
+      if (dimension == "active&reflective") {
+        activeScore += scoreValue1;
+        reflectiveScore += scoreValue2;
+      } else if (dimension == "intuitive&sensing") {
+        intuitiveScore += scoreValue1;
+        sensingScore += scoreValue2;
+      } else if (dimension == "sequential&global") {
+        sequentialScore += scoreValue1;
+        globalScore += scoreValue2;
+      } else if (dimension == "visual&verbal") {
+        visualScore += scoreValue1;
+        verbalScore += scoreValue2;
+      }
 
       final newIndex = currentState.currentQuestionIndex + 1;
 
@@ -33,42 +48,19 @@ class QuestionCubit extends Cubit<QuestionState> {
         emit(currentState.copyWith(currentQuestionIndex: newIndex));
       } else {
         // عرض النتيجة النهائية بعد الإجابة عن جميع الأسئلة
-        emit(QuestionResult(activeScore, reflectiveScore));
+        emit(QuestionResult(
+            activeScore,
+            reflectiveScore,
+            visualScore,
+            verbalScore,
+            sequentialScore,
+            globalScore,
+            intuitiveScore,
+            sensingScore));
       }
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,13 +82,6 @@ class QuestionCubit extends Cubit<QuestionState> {
 //
 //   }
 // }
-
-
-
-
-
-
-
 
 // class QuestionsCubit extends Cubit<QuestionsState> {
 //   final Dio _dio;
