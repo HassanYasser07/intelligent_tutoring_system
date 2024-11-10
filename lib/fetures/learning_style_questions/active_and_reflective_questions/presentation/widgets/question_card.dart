@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/api_services/question_api_service.dart';
-import '../../data/models/modeeeel.dart';
 import '../logic/questions_cubit.dart';
 import '../logic/questions_state.dart';
 
@@ -9,10 +8,13 @@ class QuestionScreen extends StatelessWidget {
 
   final List<Map<String, int>> scoreOptions = [
     {'active': 100, 'reflective': 0},
-    {'active': 75, 'reflective': 25},
+    {'active': 80, 'reflective': 20},
+    {'active': 60, 'reflective': 40},
     {'active': 50, 'reflective': 50},
-    {'active': 25, 'reflective': 75},
+    {'active': 20, 'reflective': 80},
+    {'active': 40, 'reflective': 60},
     {'active': 0, 'reflective': 100},
+
   ];
 
 
@@ -51,7 +53,7 @@ class QuestionScreen extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(5, (index) {
+                          children: List.generate(7, (index) {
                             final scoreValue1 = scoreOptions[index]['active']!;
                             final scoreValue2 = scoreOptions[index]['reflective']!;
                             String dimension = question.dimension; // ضع البُعد المناسب هنا
