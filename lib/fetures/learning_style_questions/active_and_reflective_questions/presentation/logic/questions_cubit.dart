@@ -57,6 +57,18 @@ class QuestionCubit extends Cubit<QuestionState> {
             globalScore,
             intuitiveScore,
             sensingScore));
+
+
+        apiService.postResults(
+          activeScore: activeScore,
+          reflectiveScore: reflectiveScore,
+          visualScore: visualScore,
+          verbalScore: verbalScore,
+          sequentialScore: sequentialScore,
+          globalScore: globalScore,
+          intuitiveScore: intuitiveScore,
+          sensingScore: sensingScore,
+        );
       }
     }
   }

@@ -59,7 +59,7 @@ class QuestionScreen extends StatelessWidget {
                               onPressed: () {
                                 context.read<QuestionCubit>().nextQuestion(scoreValue1, scoreValue2,dimension);
                               },
-                              icon: Icon(Icons.circle, size: 10 + (index * 8)),
+                              icon: Icon(Icons.circle, size: 10 ),
                             );
                           }),
                         ),

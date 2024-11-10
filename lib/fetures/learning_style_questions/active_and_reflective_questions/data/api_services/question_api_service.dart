@@ -26,6 +26,41 @@ class QuestionsApiServices {
 
 
 
+  Future<void> postResults({
+    required int activeScore,
+    required int reflectiveScore,
+    required int visualScore,
+    required int verbalScore,
+    required int sequentialScore,
+    required int globalScore,
+    required int intuitiveScore,
+    required int sensingScore,
+  }) async {
+    final url = 'http://localhost:3000/learningStyleProfile'; // استبدل هذا بالرابط الفعلي لـ API
+
+    // بيانات الإرسال
+    final data = {
+      "activeScore": activeScore,
+      "reflectiveScore": reflectiveScore,
+      "sensingScore": visualScore,
+      "intuitiveScore": verbalScore,
+      "sequentialScore": sequentialScore,
+      "globalScore": globalScore,
+      "visualScore": intuitiveScore,
+      "verbalScore": sensingScore,
+    };
+
+    try {
+      // إرسال البيانات باستخدام POST
+      final response = await _dio.post(url, data: data);
+      print("Result sent successfully: ${response.data}");
+    } catch (e) {
+      print("Failed to send results: $e");
+    }
+  }
+
+
+
 
 
 
