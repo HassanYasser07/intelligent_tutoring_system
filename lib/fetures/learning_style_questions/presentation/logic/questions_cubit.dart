@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intelligent_tutoring_system/fetures/learning_style_questions/active_and_reflective_questions/presentation/logic/questions_state.dart';
+import 'package:intelligent_tutoring_system/fetures/learning_style_questions/presentation/logic/questions_state.dart';
 import '../../data/api_services/question_api_service.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {

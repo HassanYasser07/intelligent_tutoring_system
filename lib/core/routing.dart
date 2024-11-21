@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intelligent_tutoring_system/fetures/learning_style_questions/active_and_reflective_questions/presentation/logic/questions_cubit.dart';
-import '../fetures/learning_style_questions/active_and_reflective_questions/data/api_services/question_api_service.dart';
-import '../fetures/learning_style_questions/active_and_reflective_questions/presentation/widgets/question_widgits.dart';
+import '../fetures/learning_style_questions/data/api_services/question_api_service.dart';
+import '../fetures/learning_style_questions/presentation/logic/questions_cubit.dart';
+import '../fetures/learning_style_questions/presentation/widgets/question_widgits.dart';
 import '../fetures/learning_style_questions/qqqqqqqq.dart';
 
 /// The route configuration.

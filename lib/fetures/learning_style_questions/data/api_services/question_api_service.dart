@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
-
 import '../models/modeeeel.dart';
 
 class QuestionsApiServices {
   final Dio _dio = Dio();
 
-  // دالة لجلب الأسئلة من API وتحليلها إلى قائمة من كائنات Question
   Future<List<QuestionModell>> fetchQuestions(String dimension) async {
     try {
       final response = await _dio.get('http://192.168.1.60:3000/questions/'); // استبدل 'https://your-api-url.com/questions' بالرابط الفعلي للـ API
@@ -20,12 +18,6 @@ class QuestionsApiServices {
 
 
 
-
-
-
-
-
-
   Future<void> postResults({
     required int activeScore,
     required int reflectiveScore,
@@ -35,23 +27,22 @@ class QuestionsApiServices {
     required int globalScore,
     required int intuitiveScore,
     required int sensingScore,
-  }) async {
-    final url = 'http://localhost:3000/learningStyleProfile'; // استبدل هذا بالرابط الفعلي لـ API
+  }
+  ) async {
+    final url = 'http://192.168.1.60:3000/learningStyleProfile';
 
-    // بيانات الإرسال
     final data = {
       "activeScore": activeScore,
       "reflectiveScore": reflectiveScore,
-      "sensingScore": visualScore,
-      "intuitiveScore": verbalScore,
+      "sensingScore": sensingScore,
+      "intuitiveScore":intuitiveScore ,
       "sequentialScore": sequentialScore,
       "globalScore": globalScore,
-      "visualScore": intuitiveScore,
-      "verbalScore": sensingScore,
+      "visualScore": visualScore,
+      "verbalScore": verbalScore,
     };
 
     try {
-      // إرسال البيانات باستخدام POST
       final response = await _dio.post(url, data: data);
       print("Result sent successfully: ${response.data}");
     } catch (e) {
