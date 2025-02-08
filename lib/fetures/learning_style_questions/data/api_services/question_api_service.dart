@@ -6,7 +6,7 @@ class QuestionsApiServices {
 
   Future<List<QuestionModell>> fetchQuestions(String dimension) async {
     try {
-      final response = await _dio.get('http://192.168.1.60:3000/questions/'); // استبدل 'https://your-api-url.com/questions' بالرابط الفعلي للـ API
+      final response = await _dio.get('http://192.168.1.8:3000/questions/'); // استبدل 'https://your-api-url.com/questions' بالرابط الفعلي للـ API
       final List data = response.data as List;
       return data.map((json) => QuestionModell.fromJson(json)).toList();
     } catch (e) {
@@ -29,7 +29,7 @@ class QuestionsApiServices {
     required int sensingScore,
   }
   ) async {
-    final url = 'http://192.168.1.60:3000/learningStyleProfile';
+    final url = 'http://192.168.1.6:3000/learningStyleProfile';
 
     final data = {
       "activeScore": activeScore,
@@ -49,10 +49,4 @@ class QuestionsApiServices {
       print("Failed to send results: $e");
     }
   }
-
-
-
-
-
-
 }
