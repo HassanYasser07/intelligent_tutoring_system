@@ -1,39 +1,4 @@
-// part of 'questions_cubit.dart';
-//
-// @immutable
-// sealed class QuestionsState {}
-//
-// final class QuestionsInitial extends QuestionsState {}
-// final class QuestionsLoading extends QuestionsState {}
-// final class QuestionsSuccess extends QuestionsState {
-//   final List<QuestionModel> questions;
-//
-//   QuestionsSuccess(this.questions);
-// }
-// final class QuestionsFailure extends QuestionsState {
-//   final String error; // إضافة متغير لرسالة الخطأ
-//   QuestionsFailure(this.error);
-// }
-
-import '../../data/models/modeeeel.dart';
-
-// abstract class QuestionsState {}
-//
-// class QuestionsInitial extends QuestionsState {}
-//
-// class QuestionsLoading extends QuestionsState {}
-//
-// class QuestionsSuccess extends QuestionsState {
-//   final List<QuestionModell> questions;
-//
-//   QuestionsSuccess(this.questions, );
-// }
-//
-// class QuestionsFailure extends QuestionsState {
-//   final String error;
-//
-//   QuestionsFailure(this.error);
-// }
+import 'package:intelligent_tutoring_system/fetures/learning_style_questions/data/models/question_request_model.dart';
 
 abstract class QuestionState {
   const QuestionState();
@@ -47,7 +12,7 @@ class QuestionInitial extends QuestionState {}
 class QuestionLoading extends QuestionState {}
 
 class QuestionLoaded extends QuestionState {
-  final List<QuestionModell> questions;
+  final List<QuestionModel> questions;
   final int currentQuestionIndex;
   final String dimension;
 
@@ -56,7 +21,6 @@ class QuestionLoaded extends QuestionState {
   @override
   List<Object> get props => [questions, currentQuestionIndex];
 
-  // دالة لتحديث المؤشر والانتقال إلى السؤال التالي
   QuestionLoaded copyWith({int? currentQuestionIndex}) {
     return QuestionLoaded(
       questions,
@@ -68,24 +32,19 @@ class QuestionLoaded extends QuestionState {
 
 class QuestionError extends QuestionState {
   final String message;
-
   const QuestionError(this.message);
-
   @override
   List<Object> get props => [message];
 }
 class QuestionResult extends QuestionState {
-  final int activeScore;
-  final int reflectiveScore;
-  final int sensingScore;
-  final int intuitiveScore;
-  final int sequentialScore;
-  final int globalScore;
-  final int visualScore;
-  final int verbalScore;
+  final num activeReflectiveScore;
+  final num visualVerbalScore;
+  final num sensingIntuitiveScore;
+  final num sequentialGlobalScore;
 
-  const QuestionResult(this.activeScore, this.reflectiveScore, this.visualScore, this.verbalScore, this.sequentialScore, this.globalScore, this.intuitiveScore, this.sensingScore);
+
+  const QuestionResult(this.activeReflectiveScore, this.visualVerbalScore, this.sensingIntuitiveScore, this.sequentialGlobalScore);
 
   @override
-  List<Object> get props => [activeScore, reflectiveScore,visualScore,verbalScore,sequentialScore,globalScore,intuitiveScore,sensingScore];
+  List<Object> get props => [activeReflectiveScore, visualVerbalScore, sensingIntuitiveScore, sequentialGlobalScore];
 }

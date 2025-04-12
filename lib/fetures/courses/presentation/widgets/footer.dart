@@ -16,23 +16,23 @@ class Footer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.home, color: Colors.blue, size: 30),
+              icon: const Icon(Icons.home, color: Colors.green, size: 30),
               onPressed: () {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.play_lesson, color: Colors.blue, size: 30),
+              icon: const Icon(Icons.play_lesson, color: Colors.green, size: 30),
               onPressed: () {
               },
             ),
             SizedBox(width: 40.w), // مسافة للأيقونة العائمة
             IconButton(
-              icon: const Icon(Icons.settings, color: Colors.blue, size: 30),
+              icon: const Icon(Icons.settings, color: Colors.green, size: 30),
               onPressed: () {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.person, color: Colors.blue, size: 30),
+              icon: const Icon(Icons.person, color: Colors.green, size: 30),
               onPressed: () {
               },
             ),

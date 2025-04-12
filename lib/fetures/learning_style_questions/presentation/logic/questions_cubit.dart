@@ -1,44 +1,52 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intelligent_tutoring_system/core/helper/token_storage.dart';
+import 'package:intelligent_tutoring_system/fetures/learning_style_questions/data/models/result_model.dart';
 import 'package:intelligent_tutoring_system/fetures/learning_style_questions/presentation/logic/questions_state.dart';
-import '../../data/api_services/question_api_service.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import '../../data/api_services/questions_api_services.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
   final QuestionsApiServices apiService;
-  int activeScore = 0;
-  int reflectiveScore = 0;
-  int visualScore = 0;
-  int verbalScore = 0;
-  int sequentialScore = 0;
-  int globalScore = 0;
-  int intuitiveScore = 0;
-  int sensingScore = 0;
+  num activeScore = 0;
+  num reflectiveScore = 0;
+  num visualScore = 0;
+  num verbalScore = 0;
+  num sequentialScore = 0;
+  num globalScore = 0;
+  num intuitiveScore = 0;
+  num sensingScore = 0;
+  num activeReflectiveScore = 0;
+  num visualVerbalScore = 0;
+  num sensingIntuitiveScore = 0;
+  num sequentialGlobalScore = 0;
 
-  QuestionCubit(this.apiService) : super(QuestionInitial());
+  QuestionCubit(this.apiService,) : super(QuestionInitial());
 
   Future<void> fetchQuestions(String dimension) async {
     try {
       emit(QuestionLoading());
-      final questions = await apiService.fetchQuestions(dimension);
+      final questions = await apiService.getQuestions();
       emit(QuestionLoaded(questions, dimension));
     } catch (e) {
+      print("what is ////////////////////////////////   ${e.toString()}");
       emit(const QuestionError("Failed to load questions"));
     }
   }
 
-  void nextQuestion(int scoreValue1, int scoreValue2, String dimension) {
+  void nextQuestion(num scoreValue1, num scoreValue2, String dimension) async {
     if (state is QuestionLoaded) {
       final currentState = state as QuestionLoaded;
       if (dimension == "active&reflective") {
-        activeScore += scoreValue1;
+        activeReflectiveScore += scoreValue1;
         reflectiveScore += scoreValue2;
       } else if (dimension == "intuitive&sensing") {
-        intuitiveScore += scoreValue1;
-        sensingScore += scoreValue2;
+        sensingIntuitiveScore += scoreValue1;
+        intuitiveScore += scoreValue2;
       } else if (dimension == "sequential&global") {
-        sequentialScore += scoreValue1;
+        sequentialGlobalScore += scoreValue1;
         globalScore += scoreValue2;
       } else if (dimension == "visual&verbal") {
-        visualScore += scoreValue1;
+        visualVerbalScore += scoreValue1;
         verbalScore += scoreValue2;
       }
 
@@ -47,69 +55,53 @@ class QuestionCubit extends Cubit<QuestionState> {
       if (newIndex < currentState.questions.length) {
         emit(currentState.copyWith(currentQuestionIndex: newIndex));
       } else {
-        // عرض النتيجة النهائية بعد الإجابة عن جميع الأسئلة
-        emit(QuestionResult(
-            activeScore,
-            reflectiveScore,
-            visualScore,
-            verbalScore,
-            sequentialScore,
-            globalScore,
-            intuitiveScore,
-            sensingScore));
+        final activeReflectiveResult = double.parse((activeReflectiveScore / 2).toStringAsFixed(2));
+        final visualVerbalResult = double.parse((visualVerbalScore / 2).toStringAsFixed(2));
+        final sensingIntuitiveResult = double.parse((sensingIntuitiveScore / 2).toStringAsFixed(2));
+        final sequentialGlobalResult = double.parse((sequentialGlobalScore / 2).toStringAsFixed(2));
+
+        try {
+          // Get token from storage
+          final token = await AppStorage.getToken();
+          if (token == null) {
+            emit(const QuestionError("No authentication token found"));
+            return;
+          }
+
+          // Decode token to get user ID
+          final Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+          final int userId = decodedToken['id'];
+          final String email = decodedToken['email'];
 
 
-        apiService.postResults(
-          activeScore: activeScore,
-          reflectiveScore: reflectiveScore,
-          visualScore: visualScore,
-          verbalScore: verbalScore,
-          sequentialScore: sequentialScore,
-          globalScore: globalScore,
-          intuitiveScore: intuitiveScore,
-          sensingScore: sensingScore,
-        );
+          final result = ResultModel(
+            learnerId: userId,
+            learningStyleActiveReflective: activeReflectiveResult,
+            learningStyleVisualVerbal: visualVerbalResult,
+            learningStyleSensingIntuitive: sensingIntuitiveResult,
+            learningStyleSequentialGlobal: sequentialGlobalResult,
+          );
+          print(': ${result.learnerId}');
+          print(email);
+
+   
+
+          // Replace 'YOUR_TOKEN_HERE' with actual token retrieval logic
+          await apiService.updateLearningStyles(result, 'Bearer $token');
+            print('Learning styles updated successfully');
+              if (!isClosed) {
+            print('Learning styles updated successfully');
+            emit(QuestionResult(
+              activeReflectiveResult,
+              visualVerbalResult,
+              sensingIntuitiveResult,
+              sequentialGlobalResult));
+          }
+        } catch (e) {
+          print('Failed to update learning styles: ${e.toString()}');
+          emit( QuestionError("Failed to update learning styles ${e.toString()} "));
+        }
       }
     }
   }
 }
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:intelligent_tutoring_system/fetures/learning_style_questions/active_and_reflective_questions/data/models/question_request_model.dart';
-// import '../../domain/repos/question_repo.dart';
-// part 'questions_state.dart';
-//
-// class QuestionsCubit extends Cubit<QuestionsState> {
-//   final QuestionRepo questionRepo;
-//   QuestionsCubit(this.questionRepo) : super(QuestionsInitial());
-//   void getQuestions()async{
-//     emit(QuestionsLoading());
-//     var response = await questionRepo.getQuestions();
-//     response.fold((failure){
-//       emit(QuestionsFailure(failure.errMessage));
-//     }, (success){
-//       emit(QuestionsSuccess(success));
-//     });
-//
-//   }
-// }
-
-// class QuestionsCubit extends Cubit<QuestionsState> {
-//   final Dio _dio;
-//
-//   QuestionsCubit(this._dio) : super(QuestionsInitial());
-//
-//   Future<void> getQuestions() async {
-//     emit(QuestionsLoading()); // حالة تحميل
-//     try {
-//       final response = await _dio.get('http://192.168.1.60:3000/questions/active&reflective');
-//       List<QuestionModell> questions = (response.data as List)
-//           .map((questionData) => QuestionModell.fromJson(questionData))
-//           .toList();
-//       emit(QuestionsSuccess(questions,)); // حالة نجاح
-//     } catch (e) {
-//       emit(QuestionsFailure('Error fetching questions: $e')); // حالة فشل
-//     }
-//   }
-// }
