@@ -1,0 +1,2 @@
+C:/Users/hassa/AndroidStudioProjects/intelligent_tutoring_system/android/app/.cxx/Debug/3o184v3z/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/hassa/AndroidStudioProjects/intelligent_tutoring_system/android/app/.cxx/Debug/3o184v3z/armeabi-v7a/CMakeFiles/rebuild_cache.dir
