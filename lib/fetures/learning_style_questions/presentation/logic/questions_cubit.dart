@@ -28,7 +28,7 @@ class QuestionCubit extends Cubit<QuestionState> {
       final questions = await apiService.getQuestions();
       emit(QuestionLoaded(questions, dimension));
     } catch (e) {
-      print("what is ////////////////////////////////   ${e.toString()}");
+      print("what is /////////////////////////////////   ${e.toString()}");
       emit(const QuestionError("Failed to load questions"));
     }
   }
