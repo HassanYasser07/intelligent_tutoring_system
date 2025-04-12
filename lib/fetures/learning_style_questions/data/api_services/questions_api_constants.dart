@@ -1,6 +1,13 @@
 class QuestionApiConstants{
 
-  static const apiBaseUrl='http://192.168.1.60:3000/questions/';
+  static const baseUrl='https://graduation-learners-module-backend.vercel.app/';
+
+  static const String getQuestions='questions';
+  static const String updateLearningStyle='api/learner/learning-styles';
+  static const String headers='Authorization';
+
+
+
 
 
   static const String activeAndReflective='active&reflective';
