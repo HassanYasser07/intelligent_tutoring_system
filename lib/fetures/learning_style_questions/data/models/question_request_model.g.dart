@@ -8,11 +8,11 @@ part of 'question_request_model.dart';
 
 QuestionModel _$QuestionModelFromJson(Map<String, dynamic> json) =>
     QuestionModel(
-      id: json['id'] as String,
-      question: json['question'] as String,
-      choice1: json['choice1'] as String,
-      choice2: json['choice2'] as String,
-      dimension: json['dimension'] as String,
+      id: json['id'] as String?,
+      question: json['question'] as String?,
+      choice1: json['choice1'] as String?,
+      choice2: json['choice2'] as String?,
+      dimension: json['dimension'] as String?,
     );
 
 Map<String, dynamic> _$QuestionModelToJson(QuestionModel instance) =>
