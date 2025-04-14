@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/routing.dart';
-import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/already_have_account.dart';
+import 'package:intelligent_tutoring_system/core/general_widgets/already_have_account.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/dialogs.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/sign_up_form.dart';
 import '../../../../../core/general_widgets/app_text_buttom.dart';
@@ -49,14 +49,26 @@ class RegisterScreen extends StatelessWidget {
                     if (state is RegisterLoading)
                       const CircularProgressIndicator()
                     else
-                      AppTextButtonn(
-                        buttonText: 'Signup',
-                        onPressed: () {
-                          context.read<RegisterCubit>().register();
-                        },
+                      // AppTextButtonn(
+                      //   buttonText: 'Signup',
+                      //   onPressed: () {
+                      //     context.read<RegisterCubit>().register();
+                      //   },
+                      // ),
+                      FractionallySizedBox(
+                        widthFactor: 0.99, // 80% من عرض الشاشة
+                        child: CustomButton(
+                          label: "Register",
+                          variant: ButtonVariant.secondary,
+                          size: ButtonSize.lg,
+                          onPressed: () {
+                            context.read<RegisterCubit>().register();},
+                        ),
                       ),
+
                     const SizedBox(height: 16),
                     AlreadyHaveAccountText(
+                      account: 'Already have an account?',
                         text: 'Login',
                         onActionPressed: () {
                           GoRouter.of(context).push(Routes.kLoginView);

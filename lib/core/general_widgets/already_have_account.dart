@@ -5,12 +5,13 @@ import 'package:intelligent_tutoring_system/core/theme/style.dart';
 
 class AlreadyHaveAccountText extends StatelessWidget {
   final String text;
+  final String account;
   final VoidCallback onActionPressed;
   
   const AlreadyHaveAccountText({
     super.key,
     required this.text,
-    required this.onActionPressed,
+    required this.onActionPressed, required this.account,
   });
 
   @override
@@ -20,7 +21,7 @@ class AlreadyHaveAccountText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: 'Already have an account?',
+            text: '$account',
             style: Styles.font13DarkBlueRegular,
           ),
           TextSpan(
