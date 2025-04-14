@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intelligent_tutoring_system/core/general%20widgets/app_text_buttom.dart';
 import 'package:intelligent_tutoring_system/core/routing.dart';
-import 'package:intelligent_tutoring_system/core/theme/style.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/already_have_account.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/dialogs.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/sign_up_form.dart';
+import '../../../../../core/general_widgets/app_text_buttom.dart';
 import '../cubit/register_cubit.dart';
 import '../cubit/register_state.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intelligent_tutoring_system/core/general%20widgets/app_text_form_field.dart';
 import 'package:intelligent_tutoring_system/core/helper/app_regex.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/cubit/register_cubit.dart';
-import 'package:intelligent_tutoring_system/core/general%20widgets/password_validations.dart';
+import '../../../../../../core/general_widgets/app_text_form_field.dart';
+import '../../../../../../core/general_widgets/password_validations.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
