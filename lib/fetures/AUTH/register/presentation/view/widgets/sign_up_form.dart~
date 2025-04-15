@@ -109,7 +109,7 @@ class _SignupFormState extends State<SignupForm> {
           SizedBox(
             height: 18.h,
           ),
-
+         
           PasswordValidations(
             hasLowerCase: hasLowercase,
             hasUpperCase: hasUppercase,
