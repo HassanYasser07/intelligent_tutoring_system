@@ -1,0 +1,71 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_svg/svg.dart';
+// import 'package:intelligent_tutoring_system/fetures/courses/presentation/widgets/menu_item_widget.dart' show MenuItemWidget;
+// class DrawerContent extends StatelessWidget {
+//   final VoidCallback onClose;
+//   const DrawerContent({required this.onClose, super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       elevation: 1,
+//       child: Container(
+//         color: Colors.white,
+//         padding: const EdgeInsets.symmetric(horizontal: 16),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // أيقونة الإغلاق
+//             Align(
+//               alignment: Alignment.topRight,
+//               child: IconButton(
+//                 icon: const Icon(Icons.close),
+//                 onPressed: onClose,
+//               ),
+//             ),
+//
+//             // اللوجو والعنوان
+//             Row(
+//               children: [
+//                 SvgPicture.asset('assets/tt.svg', height: 45, fit: BoxFit.fill,),
+//                 const SizedBox(width: 8),
+//                 const Text(
+//                   'codeingo',
+//                   style: TextStyle(
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.green,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             const SizedBox(height: 20),
+//
+//             // عناصر القائمة
+//             MenuItemWidget(title: 'LEARN', icon: Icons.home ,),
+//             MenuItemWidget(title: 'LEADERBOARD', icon: Icons.emoji_events ,),
+//             MenuItemWidget(title: 'QUESTIONS', icon: Icons.question_answer ,),
+//             MenuItemWidget(title: 'SHOP', icon: Icons.shopping_bag ,),
+//
+//             // MenuItemWidget(icon:Icons.emoji_events, title:'LEADERBOARD'),
+//             // MenuItemWidget(icon:Icons.question_answer, title:'QUESTIONS'),
+//             // MenuItemWidget(icon:Icons.shopping_bag,title: 'SHOP'),
+//
+//             const Spacer(),
+//
+//             // صورة الملف الشخصي
+//             Align(
+//               alignment: Alignment.bottomLeft,
+//               child: CircleAvatar(
+//                 radius: 24,
+//                 backgroundImage: AssetImage('assets/Course.PNG'),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//
+// }
