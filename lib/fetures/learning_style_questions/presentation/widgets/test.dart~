@@ -1,0 +1,242 @@
+import 'package:flutter/material.dart';
+
+class LearningStyleResultView extends StatelessWidget {
+  final Map<String, double> scores;
+  
+  const LearningStyleResultView({
+    Key? key,
+    required this.scores,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth;
+        final isSmallScreen = maxWidth < 600;
+
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(isSmallScreen ? 16.0 : 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeader(),
+                SizedBox(height: isSmallScreen ? 20 : 32),
+                _buildScoreGrid(isSmallScreen),
+                SizedBox(height: isSmallScreen ? 24 : 32),
+                _buildButtons(isSmallScreen),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF58CC02),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.emoji_events,
+            color: Colors.white,
+            size: 32,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "You've unlocked your brain's learning style!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  "Here's what your brain loves most!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScoreGrid(bool isSmallScreen) {
+    final pairs = [
+      {'Active': 0.8, 'Reflective': 0.2},
+      {'Sensing': 0.4, 'Intuitive': 0.3},
+      {'Sequential': 1.0, 'Global': 0.6},
+      {'Visual': 0.1, 'Verbal': 0.8},
+    ];
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: isSmallScreen ? 2 : 4,
+        childAspectRatio: 1.5,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+      ),
+      itemCount: pairs.length * 2,
+      itemBuilder: (context, index) {
+        final pairIndex = index ~/ 2;
+        final isFirstInPair = index % 2 == 0;
+        final pair = pairs[pairIndex];
+        final entry = isFirstInPair 
+            ? pair.entries.first 
+            : pair.entries.last;
+
+        return _buildScoreCard(
+          entry.key,
+          entry.value,
+          isSmallScreen,
+        );
+      },
+    );
+  }
+
+  Widget _buildScoreCard(String label, double score, bool isSmallScreen) {
+    return Container(
+      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              _getIconForLabel(label),
+              const SizedBox(width: 8),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 14 : 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: LinearProgressIndicator(
+              value: score,
+              backgroundColor: Colors.grey[200],
+              valueColor: AlwaysStoppedAnimation<Color>(
+                _getColorForLabel(label),
+              ),
+              minHeight: 8,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            score.toString(),
+            style: TextStyle(
+              fontSize: isSmallScreen ? 12 : 14,
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtons(bool isSmallScreen) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF58CC02),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: const Text(
+            'START LEARNING!',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton(
+          onPressed: () {},
+          style: OutlinedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            side: const BorderSide(color: Color(0xFF58CC02)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: const Text(
+            'Retake the quiz',
+            style: TextStyle(
+              color: Color(0xFF58CC02),
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Icon _getIconForLabel(String label) {
+    switch (label.toLowerCase()) {
+      case 'active':
+        return const Icon(Icons.directions_run, color: Color(0xFF58CC02));
+      case 'reflective':
+        return const Icon(Icons.psychology, color: Color(0xFF58CC02));
+      case 'sensing':
+        return const Icon(Icons.touch_app, color: Color(0xFF58CC02));
+      case 'intuitive':
+        return const Icon(Icons.lightbulb, color: Color(0xFF58CC02));
+      case 'sequential':
+        return const Icon(Icons.format_list_numbered, color: Color(0xFF58CC02));
+      case 'global':
+        return const Icon(Icons.public, color: Color(0xFF58CC02));
+      case 'visual':
+        return const Icon(Icons.remove_red_eye, color: Color(0xFF58CC02));
+      case 'verbal':
+        return const Icon(Icons.chat_bubble, color: Color(0xFF58CC02));
+      default:
+        return const Icon(Icons.star, color: Color(0xFF58CC02));
+    }
+  }
+
+  Color _getColorForLabel(String label) {
+    // You can customize colors for different labels if needed
+    return const Color(0xFF58CC02);
+  }
+}

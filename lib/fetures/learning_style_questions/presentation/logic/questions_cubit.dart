@@ -7,14 +7,11 @@ import '../../data/api_services/questions_api_services.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
   final QuestionsApiServices apiService;
-  num activeScore = 0;
   num reflectiveScore = 0;
-  num visualScore = 0;
   num verbalScore = 0;
-  num sequentialScore = 0;
   num globalScore = 0;
   num intuitiveScore = 0;
-  num sensingScore = 0;
+
   num activeReflectiveScore = 0;
   num visualVerbalScore = 0;
   num sensingIntuitiveScore = 0;
@@ -52,14 +49,43 @@ class QuestionCubit extends Cubit<QuestionState> {
 
       final newIndex = currentState.currentQuestionIndex + 1;
 
+
       if (newIndex < currentState.questions.length) {
         emit(currentState.copyWith(currentQuestionIndex: newIndex));
       } else {
         final activeReflectiveResult = double.parse((activeReflectiveScore / 2).toStringAsFixed(2));
-        final visualVerbalResult = double.parse((visualVerbalScore / 2).toStringAsFixed(2));
-        final sensingIntuitiveResult = double.parse((sensingIntuitiveScore / 2).toStringAsFixed(2));
-        final sequentialGlobalResult = double.parse((sequentialGlobalScore / 2).toStringAsFixed(2));
+        final reflectiveResult = double.parse((1-activeReflectiveResult).toStringAsFixed(2));
 
+        final visualVerbalResult = double.parse((visualVerbalScore / 2).toStringAsFixed(2));
+        final verbalResult = double.parse((1-visualVerbalResult).toStringAsFixed(2));
+
+        final sensingIntuitiveResult = double.parse((sensingIntuitiveScore / 2).toStringAsFixed(2));
+        final intuitiveResult = double.parse((1-sensingIntuitiveResult).toStringAsFixed(2));
+
+        final sequentialGlobalResult = double.parse((sequentialGlobalScore / 2).toStringAsFixed(2));
+        final globalResult = double.parse((1-sequentialGlobalResult).toStringAsFixed(2));
+
+        print(
+            "activeReflectiveScore ${activeReflectiveResult} "
+                "reflectiveScore ${reflectiveResult} "
+                "visualVerbalScore ${visualVerbalResult} "
+                "verbalScore ${verbalResult} "
+                "sequentialGlobalScore ${sequentialGlobalResult} "
+                "globalScore ${globalResult} "
+                "sensingIntuitiveScore ${sensingIntuitiveResult} "
+                "intuitiveScore ${intuitiveResult} "
+        );
+
+        emit(QuestionResult(
+            activeReflectiveResult,
+            visualVerbalResult,
+            sensingIntuitiveResult,
+            sequentialGlobalResult,
+            verbalResult,
+            globalResult,
+            intuitiveResult,
+            reflectiveResult
+        ));
         try {
           // Get token from storage
           final token = await AppStorage.getToken();
@@ -84,18 +110,17 @@ class QuestionCubit extends Cubit<QuestionState> {
           print(': ${result.learnerId}');
           print(email);
 
-   
+
 
           // Replace 'YOUR_TOKEN_HERE' with actual token retrieval logic
           await apiService.updateLearningStyles(result, 'Bearer $token');
             print('Learning styles updated successfully');
               if (!isClosed) {
             print('Learning styles updated successfully');
-            emit(QuestionResult(
-              activeReflectiveResult,
-              visualVerbalResult,
-              sensingIntuitiveResult,
-              sequentialGlobalResult));
+
+
+
+
           }
         } catch (e) {
           print('Failed to update learning styles: ${e.toString()}');

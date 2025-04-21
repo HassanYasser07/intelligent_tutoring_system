@@ -37,14 +37,20 @@ class QuestionError extends QuestionState {
   List<Object> get props => [message];
 }
 class QuestionResult extends QuestionState {
+  final num reflectiveScore ;
+  final num verbalScore ;
+  final num globalScore ;
+  final num sensingScore ;
+
   final num activeReflectiveScore;
   final num visualVerbalScore;
   final num sensingIntuitiveScore;
   final num sequentialGlobalScore;
 
 
-  const QuestionResult(this.activeReflectiveScore, this.visualVerbalScore, this.sensingIntuitiveScore, this.sequentialGlobalScore);
+  const QuestionResult(this.activeReflectiveScore, this.visualVerbalScore, this.sensingIntuitiveScore, this.sequentialGlobalScore,  this.verbalScore, this.globalScore, this.sensingScore, this.reflectiveScore);
 
   @override
-  List<Object> get props => [activeReflectiveScore, visualVerbalScore, sensingIntuitiveScore, sequentialGlobalScore];
+  List<Object> get props => [activeReflectiveScore, visualVerbalScore, sensingIntuitiveScore, sequentialGlobalScore
+  ,reflectiveScore,verbalScore,globalScore,sensingScore];
 }

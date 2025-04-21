@@ -7,9 +7,6 @@ class QuestionApiConstants{
   static const String headers='Authorization';
 
 
-
-
-
   static const String activeAndReflective='active&reflective';
   static const String intuitiveAndSensing='intuitive&sensing';
   static const String sequentialAndGlobal='sequential&global';
