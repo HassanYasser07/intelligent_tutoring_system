@@ -245,7 +245,7 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.super_:
         return Colors.white;
       case ButtonVariant.locked:
-        return Color(0xFF58CC02);
+        return Colors.green;
       case ButtonVariant.primaryOutline:
         return Colors.green;
       case ButtonVariant.secondaryOutline:

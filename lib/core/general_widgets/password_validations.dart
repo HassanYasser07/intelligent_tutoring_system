@@ -23,34 +23,32 @@ class PasswordValidations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        buildValidationRow('At least 1 lowercase letter', hasLowerCase),
+        buildValidationRow('At least 1 lowercase letter', hasLowerCase,Colors.orange),
         SizedBox(
           height: 2.h,
         ),
-        buildValidationRow('At least 1 uppercase letter', hasUpperCase),
+        buildValidationRow('At least 1 uppercase letter', hasUpperCase,Colors.red),
         SizedBox(
           height: 2.h,
         ),
-        buildValidationRow('At least 1 number ', hasNumber),
+        buildValidationRow('At least 1 number ', hasNumber,Colors.lightBlue),
         SizedBox(
           height: 2.h,
         ),
-        buildValidationRow('At least 8 characters long', hasMinLength),
+        buildValidationRow('At least 8 characters long', hasMinLength,Colors.green),
         SizedBox(
           height: 2.h,
         ),
-        buildValidationRow('At least 1 special character', hasSpecialCharacters),
+        buildValidationRow('At least 1 special character', hasSpecialCharacters,Colors.purple),
       ],
     );
   }
 }
 
-buildValidationRow(String text, bool hasValidated) {
+buildValidationRow(String text, bool hasValidated,Color color) {
   return Row(
     children: [
-      const CircleAvatar(
-        radius: 2.5,
-      ),
+     Icon(Icons.star_rounded, color: color, size: 25.sp,),
       SizedBox(
         width: 6.h,
       ),
