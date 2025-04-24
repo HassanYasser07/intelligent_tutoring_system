@@ -1,0 +1,27 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intelligent_tutoring_system/fetures/Getting%20learning%20goal%20&%20knowledge%20base/data/repo/goal_and%20_knowledge_base_repo.dart';
+import 'package:intelligent_tutoring_system/fetures/Getting%20learning%20goal%20&%20knowledge%20base/presentation/cubit/shat_boot_state.dart';
+
+class LearningAnalysisCubit extends Cubit<LearningAnalysisState> {
+  final GoalAndKnowledgeBaseRepo _repo;
+
+  LearningAnalysisCubit(this._repo) : super(LearningAnalysisInitial());
+
+  Future<void> analyzeLearning(String userKnowledge, String userGoal) async {
+    if (userKnowledge.isEmpty || userGoal.isEmpty) {
+      emit(LearningAnalysisError('Please fill all fields'));
+      return;
+    }
+
+    emit(LearningAnalysisLoading());
+    try {
+      final response = await _repo.analyzeLearning(userKnowledge, userGoal);
+      emit(LearningAnalysisSuccess(
+        knowledgeBase: response.knowledgeBase,
+        learningGoal: response.learningGoal,
+      ));
+    } catch (e) {
+      emit(LearningAnalysisError(e.toString()));
+    }
+  }
+}
