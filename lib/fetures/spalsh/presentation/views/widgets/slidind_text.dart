@@ -14,9 +14,9 @@ class SlidingText extends StatelessWidget {
         builder: (context, _) {
           return SlideTransition(
               position: slidingAnimation,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: const Text(
+              child: const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Text(
                   "CODINGO",
                   textAlign: TextAlign.center,
                   style: TextStyle(
