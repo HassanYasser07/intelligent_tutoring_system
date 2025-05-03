@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/helper/token_storage.dart';
 import 'package:intelligent_tutoring_system/fetures/spalsh/presentation/views/widgets/slidind_text.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/helper/shatboot_response_storage.dart';
 import '../../../../../core/routing.dart';
 
