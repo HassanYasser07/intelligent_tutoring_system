@@ -1,0 +1,48 @@
+import 'dart:convert';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../Getting_learning_goal_knowledge_base/data/models/goal_and_knowledge_base_response_model.dart';
+import '../../data/api_services/user_knowledge_api_services.dart';
+import '../../data/models/user_knowledge_request_model.dart';
+import 'user_knowledge_states.dart';
+
+class UserKnowledgeCubit extends Cubit<UserKnowledgeState> {
+  final UserKnowledgeApiServices _apiService;
+  final SharedPreferences _prefs;
+
+  UserKnowledgeCubit(this._apiService, this._prefs) : super(UserKnowledgeInitial());
+
+ Future<void> getBestPath(LearningAnalysisResponse analysisResponse) async {
+   try {
+     emit(UserKnowledgeLoading());
+     
+final token = _prefs.getString('token') ?? '';
+     if (token.isEmpty) {
+       emit(const UserKnowledgeError('User token not found'));
+       return;
+     }
+     final Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+     final email = decodedToken['email'] as String;
+     if (email.isEmpty) {
+       emit(const UserKnowledgeError('Email not found in token'));
+       return;
+     }
+     final request = UserKnowledgeRequestModel(
+       learnerEmail: email,
+       learningGoals: analysisResponse.learningGoal,
+       knowledgeBase: analysisResponse.knowledgeBase,
+     );
+ 
+     final response = await _apiService.getBestPath(request);
+     // ✅ بعد نجاح الاتصال خزن البيانات في SharedPreferences
+     final String responseJson = jsonEncode(response.toJson());
+     await _prefs.setString('cached_learning_objects', responseJson);
+
+     emit(UserKnowledgeSuccess(response));
+   } catch (e) {
+     emit(UserKnowledgeError(e.toString()));
+   }
+ }
+}
