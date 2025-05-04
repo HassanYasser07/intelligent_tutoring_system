@@ -1,0 +1,247 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:go_router/go_router.dart';
+// import 'package:intelligent_tutoring_system/core/general_widgets/app_text_buttom.dart';
+// import 'package:intelligent_tutoring_system/fetures/profile/presentation/cubit/profile_cubit.dart';
+//
+// import '../../../../core/routing.dart';
+//
+// class ProfileScreen extends StatelessWidget {
+//   const ProfileScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("Profile")),
+//       body: BlocBuilder<ProfileCubit, ProfileState>(
+//         builder: (context, state) {
+//           if (state is ProfileLoading) {
+//             return const Center(child: CircularProgressIndicator());
+//           } else if (state is ProfileLoaded) {
+//             final profile = state.profile;
+//             return SingleChildScrollView(
+//               child: Padding(
+//                 padding: const EdgeInsets.all(8.0),
+//                 child: Column(
+//                   children: [
+//                     Container(
+//                       decoration: BoxDecoration(
+//                         color: Color(0xFFE2FFCC),
+//                         borderRadius: BorderRadius.circular(20),
+//                         boxShadow: [
+//                           BoxShadow(
+//                             color: Colors.black.withOpacity(0.5),
+//                             blurRadius: 10,
+//                             offset: const Offset(0, 4),
+//                           ),
+//                         ]
+//                       ),
+//                       child: Padding(
+//                         padding: const EdgeInsets.all(18.0),
+//                         child: Column(
+//                           children: [
+//                             Text('Your Learning Style',style: TextStyle(
+//                               color: Color(0xFF54BA07),
+//                               fontSize: 18,
+//                               fontWeight: FontWeight.w900
+//                             ),),
+//                             Container(
+//
+//                               color: Color(0xFFd6f9bc),
+//
+//                               child: Column(
+//                                 children: [
+//
+//
+//
+//                                   _buildResultSection(
+//                                     'Active',
+//                                       profile.learningStyleActiveReflective.toString(),
+//                                     'assets/icons/1.png',
+//                                     profile.learningStyleActiveReflective!
+//
+//                                   ),
+//                                   _buildResultSection(
+//                                     'Reflective',
+//                                       ' ${(1 - profile.learningStyleActiveReflective!).toString()}',
+//                                     'assets/icons/2.png',
+//                                       1- profile.learningStyleActiveReflective!
+//                                   ),
+//
+//
+//
+//
+//                                   _buildResultSection(
+//                                     'Sensing',
+//                                       profile.learningStyleSensingIntuitive.toString(),
+//                                     'assets/icons/3.png', profile.learningStyleSensingIntuitive!
+//                                   ),
+//
+//                                   ////////////////
+//                                   _buildResultSection(
+//                                     'Intuitive',
+//                                       ' ${(1 - profile.learningStyleSensingIntuitive!).toStringAsFixed(2)}',
+//                                     'assets/icons/4.png',
+//                                       1- profile.learningStyleSensingIntuitive!
+//                                   ),
+//
+//
+//
+//
+//                                   _buildResultSection(
+//                                     'Sequential',
+//                                       ' ${(profile.learningStyleSequentialGlobal!).toStringAsFixed(2)}',
+//                                     'assets/icons/5.png', profile.learningStyleSequentialGlobal!
+//                                   ),
+//
+//                                   //////////////////////////
+//                                   _buildResultSection(
+//                                     'Global',
+//                                       ' ${(1 - profile.learningStyleSequentialGlobal!).toStringAsFixed(2)}',
+//
+//                                       'assets/icons/6.png',1-profile.learningStyleSequentialGlobal!
+//                                   ),
+//
+//
+//
+//
+//
+//
+//                                   _buildResultSection(
+//                                     'Visual',
+//                                     '0.54',
+//                                     'assets/icons/7.png', profile.learningStyleVisualVerbal!
+//                                   ),
+//                                   _buildResultSection(
+//                                     'Verbal',
+//                                       ' ${(1 - profile.learningStyleVisualVerbal!).toStringAsFixed(2)}',
+//                                     'assets/icons/8.png',1- profile.learningStyleVisualVerbal!
+//                                   ),
+//                                 ],
+//                               ),
+//
+//
+//                             ),
+//                             SizedBox(height: 10,),
+//                             CustomButton(
+//                               size: ButtonSize.large,
+//                               label: 'Restyle',
+//                               variant: ButtonVariant.super_,
+//                               onPressed: () async {
+//                                 await GoRouter.of(context).pushReplacement(Routes.kLearningStyleQuestionsView);
+//                               },
+//                             ),
+//                           ],
+//
+//                         ),
+//                       ),
+//
+//                     )
+//                   ],
+//                 ),
+//               ),
+//             );
+//           } else if (state is ProfileError) {
+//             return Center(child: Text('Error: ${state.message}'));
+//           }
+//           return const Center(child: Text("No Data"));
+//         },
+//       ),
+//     );
+//   }
+//
+//   Widget _buildResultSection(String title, String result, String imgUrl ,double resultValue) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 8, ),
+//       child: Row(
+//         children: [
+//           /// Image + Title section (30%)
+//           Expanded(
+//             flex: 3,
+//             child: Row(
+//               children: [
+//                 Image.asset(
+//                   imgUrl,
+//                   width: 24,
+//                   height: 24,
+//                   fit: BoxFit.contain,
+//                 ),
+//                 const SizedBox(width: 6),
+//                 Flexible( // To prevent overflow and wrap gracefully
+//                   child: Text(
+//                     title,
+//                     overflow: TextOverflow.ellipsis,
+//                     maxLines: 1,
+//                     style: const TextStyle(
+//                       color: Color(0xFF58CC02),
+//                       fontSize: 16,
+//                       fontWeight: FontWeight.w500,
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//
+//           const SizedBox(width: 5),
+//           /// Progress Bar section (60%)
+//           Expanded(
+//             flex: 5,
+//             child: ClipRRect(
+//               borderRadius: BorderRadius.circular(8),
+//               child: LinearProgressIndicator(
+//                 value: resultValue,
+//                 backgroundColor: const Color(0xFF58CC02),
+//                 valueColor: const AlwaysStoppedAnimation<Color>(
+//                   Color(0xFFFFC800),
+//                 ),
+//                 minHeight: 13,
+//               ),
+//             ),
+//           ),
+//           const SizedBox(width: 5),
+//           /// Result Text section (10%)
+//           Expanded(
+//             flex: 1,
+//             child: Text(
+//               resultValue.toStringAsFixed(2),
+//               textAlign: TextAlign.end,
+//               style: const TextStyle(
+//                 fontSize: 16,
+//                 color: Color(0xFFD3B200),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }}
+// profile_screen.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:intelligent_tutoring_system/fetures/profile/presentation/cubit/profile_cubit.dart';
+import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/widgets/profile_content.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Profile")),
+      body: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is ProfileLoaded) {
+            return ProfileContent(profile: state.profile);
+          } else if (state is ProfileError) {
+            return Center(child: Text('Error: ${state.message}'));
+          }
+          return const Center(child: Text("No Data"));
+        },
+      ),
+    );
+  }
+}

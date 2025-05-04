@@ -1,0 +1,41 @@
+// import 'package:flutter/material.dart';
+// import 'package:intelligent_tutoring_system/fetures/topics/presentation/widgets/series_of_topics.dart';
+// import '../../../../core/general widgets/custom_appBar.dart';
+// class TopicsViewBody extends StatelessWidget {
+//   const TopicsViewBody({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return  Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         CustomAppBar(title:' Lesson Video',showBackButton: true,),
+//         Padding(
+//           padding: const EdgeInsets.all(16),
+//           child: ClipRRect(
+//             borderRadius: const BorderRadius.only(
+//               topLeft: Radius.circular(30),
+//               bottomRight: Radius.circular(30),
+//             ),
+//             child: Container(
+//               width: double.infinity,
+//               padding: const EdgeInsets.all(16),
+//               decoration: BoxDecoration(
+//                 color: Colors.green.shade400,
+//                 borderRadius: BorderRadius.circular(8),
+//               ),
+//               child: const Text(
+//                 'Unit 1\nLearn the basics of Spanish',
+//                 style: TextStyle(color: Colors.white, fontSize: 16),
+//               ),
+//             ),
+//           ),
+//         ),
+//
+//
+//          SeriesOfTopics(learnerEmail: '',),
+//
+//       ],
+//     );
+//   }
+// }
