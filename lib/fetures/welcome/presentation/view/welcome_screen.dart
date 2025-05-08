@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/general_widgets/already_have_account.dart';
+import 'package:intelligent_tutoring_system/fetures/welcome/presentation/view/widgets/image_logo.dart';
+import 'package:intelligent_tutoring_system/fetures/welcome/presentation/view/widgets/tittle.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
 import '../../../../core/routing.dart';
+import '../../../../core/general_widgets/already_have_account.dart';
+import 'widgets/welcome_illustration.dart';
+import 'widgets/welcome_text.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -18,53 +22,22 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Codingo',
-                  style: TextStyle(
-                    fontSize: 48.sp,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.green,
-                  ),
-                ),
-                Container(
-                  width: 200.w,
-                  height: 200.w,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(60.r),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/1 1.png',
-                    ),
-                  ),
-                ),
-                Image.asset(
-                  'assets/Component 1.png',
-                  height: 200.h,
-                  //  width: double.infinity, // Make image fill screen width
-                  // fit: BoxFit.fitWidth,
-                  fit: BoxFit.contain,
-                ),
+                SizedBox(height: 15.h),
+                const AppTitle(),
+                const LogoImage(),
+                const WelcomeIllustration(),
                 SizedBox(height: 24.h),
-                Text(
-                  'Learn, practice, and master\nprogramming. Together with\nyour Codingo team!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    height: 1.1,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                const WelcomeText(),
                 SizedBox(height: 20.h),
                 FractionallySizedBox(
-                  widthFactor: 0.99, // 80% من عرض الشاشة
+                  widthFactor: 0.99,
                   child: CustomButton(
                     label: "GET STARTED",
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,
                     onPressed: () {
-                      GoRouter.of(context).push(Routes.kLoginView);},
+                      GoRouter.of(context).push(Routes.kLoginView);
+                    },
                   ),
                 ),
                 SizedBox(height: 20.h),
