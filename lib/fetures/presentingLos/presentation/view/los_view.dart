@@ -4,6 +4,7 @@ import 'package:intelligent_tutoring_system/core/general_widgets/custom_appBar.d
 import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/view/widgets/speech_bubble_painter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
+import '../../../../core/helper/completion_los_helper.dart';
 import '../cubit/los_cubit.dart';
 import '../cubit/los_states.dart';
 
@@ -117,7 +118,8 @@ class _LOsViewState extends State<LOsView> {
                       size: ButtonSize.large,
                       label: 'Back to Topics',
                       variant: ButtonVariant.super_,
-                      onPressed: () {
+                      onPressed: () async {
+                        await CompletionLosHelper.markLoAsCompleted(widget.loId); // ✅
                         Navigator.pop(context);
                       },
                     ),

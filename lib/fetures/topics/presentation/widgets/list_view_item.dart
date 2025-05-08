@@ -6,9 +6,10 @@ import 'package:intelligent_tutoring_system/fetures/presentingLos/data/api_servi
 import 'package:intelligent_tutoring_system/fetures/presentingLos/data/repo/los_repo.dart';
 import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/cubit/los_cubit.dart';
 import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/view/los_view.dart';
+import '../../../../core/helper/completion_los_helper.dart';
 import '../../data/models/user_path_response_model.dart';
 
-class LearningObjectItem extends StatelessWidget {
+class LearningObjectItem extends StatefulWidget {
   final LearningObject learningObject;
   final int index;
 
@@ -17,6 +18,29 @@ class LearningObjectItem extends StatelessWidget {
     required this.learningObject,
     required this.index,
   });
+
+  @override
+  State<LearningObjectItem> createState() => _LearningObjectItemState();
+
+}
+
+class _LearningObjectItemState extends State<LearningObjectItem> {
+
+  bool isCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfCompleted();
+  }
+
+  Future<void> _checkIfCompleted() async {
+    final completed = await CompletionLosHelper.isLoCompleted(
+        widget.learningObject.loId);
+    setState(() {
+      isCompleted = completed;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +57,25 @@ class LearningObjectItem extends StatelessWidget {
         children: [
           Positioned(
             top: 10,
-            right: sin(index * pi / 4) * 50 + 160,
+            right: sin(widget.index * pi / 4) * 50 + 160,
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                final result = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                      create: (_) => LOsCubit(LORepository(LOApiService(Dio()))),
-                      child: LOsView(loId: learningObject.loId),
-                    ),
+                    builder: (context) =>
+                        BlocProvider(
+                          create: (_) =>
+                              LOsCubit(LORepository(LOApiService(Dio()))),
+                          child: LOsView(loId: widget.learningObject.loId),
+                        ),
                   ),
                 );
+                // 🔄 أعد البناء بعد الرجوع، إذا تم تحديث الحالة
+                if (result == true) {
+                  (context as Element).markNeedsBuild(); // Force rebuild
+                }
+                _checkIfCompleted();
               },
               child: SizedBox(
                 width: 80,
@@ -60,7 +91,8 @@ class LearningObjectItem extends StatelessWidget {
                         value: progressValue,
                         strokeWidth: 6,
                         backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green.shade400),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.green.shade400),
                       ),
                     ),
                     Transform.translate(
@@ -81,11 +113,40 @@ class LearningObjectItem extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          child: Icon(Icons.star_rounded,
-                              size: 38, color: Colors.grey.withOpacity(.8)),
+                          child: Icon(
+                            isCompleted ? Icons.check_circle : Icons
+                                .star_rounded,
+                            size: 38,
+                            color: isCompleted
+                                ? Colors.green
+                                : Colors.grey.withOpacity(.8),
+                          ),
                         ),
                       ),
                     ),
+                    // Transform.translate(
+                    //   offset: const Offset(0, -6),
+                    //   child: Container(
+                    //     width: 55,
+                    //     height: 55,
+                    //     decoration: BoxDecoration(
+                    //       shape: BoxShape.circle,
+                    //       color: Colors.white60,
+                    //       boxShadow: [
+                    //         BoxShadow(
+                    //           color: Colors.black.withOpacity(0.3),
+                    //           offset: const Offset(0, 6),
+                    //           blurRadius: 0,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     child: CircleAvatar(
+                    //       backgroundColor: Colors.transparent,
+                    //       child: Icon(Icons.star_rounded,
+                    //           size: 38, color: Colors.grey.withOpacity(.8)),
+                    //     ),
+                    //   ),
+                    // ),
                     Positioned(
                       left: 40 + iconX - iconSize / 2,
                       top: 32 + iconY - iconSize / 2,
