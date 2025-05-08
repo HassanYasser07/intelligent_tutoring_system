@@ -5,7 +5,8 @@ class LogoImage extends StatelessWidget {
   const LogoImage({super.key});
 
   @override
-  Widget build(BuildContext context) {    return Container(
+  Widget build(BuildContext context) {
+    return Container(
       width: 200.w,
       height: 200.w,
       decoration: BoxDecoration(
