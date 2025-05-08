@@ -7,6 +7,7 @@ import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/cubi
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/cubit/login_state.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/widgerts/email_and_password.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/already_have_account.dart';
+import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/widgerts/login_logo.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
 
 class LoginView extends StatelessWidget {
@@ -17,6 +18,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
@@ -42,22 +45,22 @@ class LoginView extends StatelessWidget {
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+                  padding: EdgeInsets.only(  top: screenHeight * 0.17, left: 20.w, right: 20.w),
                   child: Container(
                     height: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: .5),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                      borderRadius:  BorderRadius.only(
+                        topLeft: Radius.circular(30.r),
+                        topRight: Radius.circular(30.r),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding:  EdgeInsets.all(16.0.w),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            const SizedBox(height: 40),
+                            SizedBox(height: screenHeight * 0.05),
                             Text(
                               'Login',
                               style: TextStyle(
@@ -66,18 +69,12 @@ class LoginView extends StatelessWidget {
                                 color: const Color(0xFF58CC02),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                             SizedBox(height: 16.h),
                             const EmailAndPassword(),
-                            const SizedBox(height: 16),
+                             SizedBox(height: 16.h),
                             if (state is LoginLoading)
                               const CircularProgressIndicator()
                             else
-                              // AppTextButtonn(
-                              //   buttonText: 'Login',
-                              //   onPressed: () {
-                              //     context.read<LoginCubit>().login(context);
-                              //   },
-                              // ),
                               FractionallySizedBox(
                                 widthFactor: 0.99, // 80% من عرض الشاشة
                                 child: CustomButton(
@@ -96,20 +93,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 430,
-                  left: 0,
-                  right: 0,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 210,
-                        height: 210,
-                        child: Image.asset('assets/duo.png', fit: BoxFit.cover),
-                      ),
-                    ],
-                  ),
-                ),
+                const LoginLogo(),
               ],
             ),
           );
@@ -127,7 +111,7 @@ class LoginView extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              context.go(Routes.kCourseView);
+              context.go(Routes.kTopicsView);
             },
             child: const Text('OK'),
           ),
