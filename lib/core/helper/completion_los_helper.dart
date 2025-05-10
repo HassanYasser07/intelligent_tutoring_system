@@ -17,4 +17,9 @@ class CompletionLosHelper {
     final completedIds = prefs.getStringList(_key) ?? [];
     return completedIds.contains(loId.toString());
   }
+  static Future<void> printCompletedLOs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final completedIds = prefs.getStringList(_key) ?? [];
+    print('✅ Completed Learning Objects: $completedIds');
+  }
 }
