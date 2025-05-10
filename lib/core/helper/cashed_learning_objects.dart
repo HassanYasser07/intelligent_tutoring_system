@@ -13,12 +13,18 @@ class SavedAllTopics {
     return prefs.getStringList(_key) ?? [];
   }
 
+
   Future<void> addString(String newString) async {
     final prefs = await SharedPreferences.getInstance();
     final currentList = prefs.getStringList(_key) ?? [];
-    currentList.add(newString);
-    await prefs.setStringList(_key, currentList);
+
+    if (!currentList.contains(newString)) {
+      currentList.add(newString);
+      await prefs.setStringList(_key, currentList);
+    }
   }
+
+
 
   Future<void> clearAll() async {
     final prefs = await SharedPreferences.getInstance();
