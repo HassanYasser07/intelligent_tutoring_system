@@ -44,7 +44,7 @@ class _LearningObjectItemState extends State<LearningObjectItem> {
 
   @override
   Widget build(BuildContext context) {
-    double progressValue = 0.75;
+    double progressValue = isCompleted ? 1 : 0;
     double radius = 35;
     double angle = 2 * pi * progressValue;
     double iconSize = 25;
@@ -67,11 +67,14 @@ class _LearningObjectItemState extends State<LearningObjectItem> {
                         BlocProvider(
                           create: (_) =>
                               LOsCubit(LORepository(LOApiService(Dio()))),
-                          child: LOsView(loId: widget.learningObject.loId),
+                          child: LOsView(
+                            loId: widget.learningObject.loId,
+                            name: widget.learningObject.name,
+                          ),
                         ),
                   ),
                 );
-                // 🔄 أعد البناء بعد الرجوع، إذا تم تحديث الحالة
+                // أعد البناء بعد الرجوع، إذا تم تحديث الحالة
                 if (result == true) {
                   (context as Element).markNeedsBuild(); // Force rebuild
                 }
@@ -124,29 +127,7 @@ class _LearningObjectItemState extends State<LearningObjectItem> {
                         ),
                       ),
                     ),
-                    // Transform.translate(
-                    //   offset: const Offset(0, -6),
-                    //   child: Container(
-                    //     width: 55,
-                    //     height: 55,
-                    //     decoration: BoxDecoration(
-                    //       shape: BoxShape.circle,
-                    //       color: Colors.white60,
-                    //       boxShadow: [
-                    //         BoxShadow(
-                    //           color: Colors.black.withOpacity(0.3),
-                    //           offset: const Offset(0, 6),
-                    //           blurRadius: 0,
-                    //         ),
-                    //       ],
-                    //     ),
-                    //     child: CircleAvatar(
-                    //       backgroundColor: Colors.transparent,
-                    //       child: Icon(Icons.star_rounded,
-                    //           size: 38, color: Colors.grey.withOpacity(.8)),
-                    //     ),
-                    //   ),
-                    // ),
+
                     Positioned(
                       left: 40 + iconX - iconSize / 2,
                       top: 32 + iconY - iconSize / 2,

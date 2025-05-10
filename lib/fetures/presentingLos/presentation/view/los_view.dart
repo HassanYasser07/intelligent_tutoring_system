@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/custom_appBar.dart';
+import 'package:intelligent_tutoring_system/core/helper/cashed_learning_objects.dart';
 import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/view/widgets/speech_bubble_painter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
@@ -9,10 +10,13 @@ import '../cubit/los_cubit.dart';
 import '../cubit/los_states.dart';
 
 class LOsView extends StatefulWidget {
+
   final int loId;
+  final String name;
   const LOsView({
     super.key,
     required this.loId,
+    required this.name,
   });
 
   @override
@@ -20,6 +24,7 @@ class LOsView extends StatefulWidget {
 }
 
 class _LOsViewState extends State<LOsView> {
+
 
   int currentIndex = 0;
   late WebViewController controller;
@@ -109,7 +114,6 @@ class _LOsViewState extends State<LOsView> {
                         }
                       },
                     ),
-
                   )
                 else
                   Padding(
@@ -119,6 +123,10 @@ class _LOsViewState extends State<LOsView> {
                       label: 'Back to Topics',
                       variant: ButtonVariant.super_,
                       onPressed: () async {
+                       await SavedAllTopics().addString(widget.name);
+                       final saved = await SavedAllTopics().getStringList();
+                      print("📦 المواضيع المحفوظة حالياً: $saved");
+
                         await CompletionLosHelper.markLoAsCompleted(widget.loId); // ✅
                         Navigator.pop(context);
                       },
@@ -137,5 +145,3 @@ class _LOsViewState extends State<LOsView> {
     );
   }
 }
-
-

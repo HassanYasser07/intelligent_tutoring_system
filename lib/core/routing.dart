@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/networking/token_service.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/data/loginRepo/login_repo.dart';
@@ -130,6 +129,7 @@ class Routes {
             create: (context) => LOsCubit(LORepository(LOApiService(Dio()))),
             child: const LOsView(
               loId: 1,
+              name: "",
             ),
           );
         },

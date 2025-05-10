@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/custom_appBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../core/helper/completion_los_helper.dart';
 import '../../Getting_learning_goal_knowledge_base/data/models/goal_and_knowledge_base_response_model.dart';
 import '../data/models/user_path_response_model.dart';
 import 'cubit/user_knowledge_cubit.dart';
@@ -33,6 +34,8 @@ class _UserPathScreenState extends State<UserPathScreen> {
   void initState() {
     super.initState();
     _checkCachedUserKnowledge();
+    CompletionLosHelper.printCompletedLOs();
+
   }
 
   void _checkCachedUserKnowledge() async {
@@ -40,11 +43,9 @@ class _UserPathScreenState extends State<UserPathScreen> {
     final cachedData = prefs.getString('cached_learning_objects');
 
     if (cachedData != null) {
-      // لو موجود بيانات كاشد
       final Map<String, dynamic> decodedJson = jsonDecode(cachedData);
       final cachedResponse = UserPathResponseModel.fromJson(decodedJson);
 
-      // مررها لحالة النجاح مباشرة
       context.read<UserKnowledgeCubit>().emit(UserKnowledgeSuccess(cachedResponse));
     } else {
 

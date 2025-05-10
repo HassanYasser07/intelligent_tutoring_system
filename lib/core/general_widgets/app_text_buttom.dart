@@ -123,6 +123,7 @@ enum ButtonVariant {
   sidebarOutline,
   none,
   default_,
+  dangered,
 }
 
 enum ButtonSize {
@@ -178,7 +179,7 @@ class CustomButton extends StatelessWidget {
       child: icon != null
           ? Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center, // ✅ إضافة هذا السطر
+        mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
           Icon(icon, size: 18),
@@ -224,6 +225,8 @@ class CustomButton extends StatelessWidget {
         return  const Color(0xFFFFB800);
       case ButtonVariant.locked:
         return Colors.white;
+      case ButtonVariant.dangered:
+        return Colors.red;
       case ButtonVariant.ghost:
       case ButtonVariant.none:
         return Colors.transparent;

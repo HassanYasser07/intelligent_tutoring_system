@@ -28,6 +28,10 @@ class DrawerListTileItem extends StatelessWidget {
         onTap: onTap,
         selected: isSelected,
         title: Text(
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22.sp,
+          ),
           title,
         ),
         leading: SvgPicture.asset(icon,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/app_text_buttom.dart';
+import '../../../../core/helper/shatboot_response_storage.dart';
 import '../../../../core/routing.dart';
 import '../../data/models/goal_and_knowledge_base_response_model.dart';
 
@@ -91,8 +92,10 @@ class PresentingBaseGoalView extends StatelessWidget {
                   widthFactor: 0.9,
                   child: CustomButton(
                     label: "continue",
-                    onPressed: () {
+                    onPressed: () async {
+                      await SharedPreferencesService().saveLearningAnalysisResponse(response);
                       context.push(Routes.kTopicsView, extra: response);
+
                     },
                     size: ButtonSize.sm,
                     variant: ButtonVariant.secondary,
