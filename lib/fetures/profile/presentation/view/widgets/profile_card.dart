@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/general_widgets/app_text_buttom.dart';
 import '../../../../../core/routing.dart';
 import '../../../data/models/profile_model.dart';
 import 'learning_style_section.dart';
 class ProfileCard extends StatelessWidget {
-  final ProfileModel profile;
 
+  final ProfileModel profile;
+  void _clearCachedUserKnowledge() async {
+    final prefs = await SharedPreferences.getInstance();
+    final success = await prefs.remove('cached_learning_objects');
+    if (success) {
+      print('✅ Cached user knowledge data deleted.');
+    } else {
+      print('⚠️ No data to delete.');
+    }
+  }
   const ProfileCard({super.key, required this.profile});
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFE2FFCC),
@@ -42,6 +53,8 @@ class ProfileCard extends StatelessWidget {
             label: 'Restyle',
             variant: ButtonVariant.super_,
             onPressed: () async {
+              _clearCachedUserKnowledge();
+
               await GoRouter.of(context).pushReplacement(Routes.kLearningStyleQuestionsView);
             },
           ),
