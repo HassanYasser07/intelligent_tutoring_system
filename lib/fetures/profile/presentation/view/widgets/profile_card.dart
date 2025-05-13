@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/general_widgets/app_text_buttom.dart';
-import '../../../../../core/routing.dart';
+import '../../../../../core/routing/routing.dart';
 import '../../../data/models/profile_model.dart';
 import 'learning_style_section.dart';
 class ProfileCard extends StatelessWidget {

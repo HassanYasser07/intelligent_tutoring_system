@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intelligent_tutoring_system/core/routing.dart';
+import 'package:intelligent_tutoring_system/core/routing/routing.dart';
 import '../../data/api_services/questions_api_services.dart';
 import '../logic/questions_cubit.dart';
 import '../logic/questions_state.dart';

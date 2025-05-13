@@ -9,7 +9,7 @@ import 'package:intelligent_tutoring_system/fetures/Getting_learning_goal_knowle
 import '../../data/models/goal_and_knowledge_base_response_model.dart';
 import '../cubit/shat_boot_cubit.dart';
 import '../cubit/shat_boot_state.dart';
-import '../../../../core/routing.dart';
+import '../../../../core/routing/routing.dart';
 
 class ShatBootView extends StatelessWidget {
   final _knowledgeController = TextEditingController();

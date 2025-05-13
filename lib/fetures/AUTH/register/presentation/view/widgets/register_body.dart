@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intelligent_tutoring_system/core/routing.dart';
+import 'package:intelligent_tutoring_system/core/routing/routing.dart';
 
 import '../../../../../../core/general_widgets/already_have_account.dart';
 import '../../../../../../core/general_widgets/app_text_buttom.dart';

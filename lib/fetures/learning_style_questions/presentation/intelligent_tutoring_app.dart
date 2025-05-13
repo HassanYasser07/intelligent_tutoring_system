@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/routing.dart';
+import '../../../core/routing/routing.dart';
 
 class IntelligentTutoringApp extends StatelessWidget {
   const IntelligentTutoringApp({super.key});
@@ -9,16 +8,13 @@ class IntelligentTutoringApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812), // ضبط التصميم بناءً على حجم الشاشة المرجعي
+      designSize: Size(375, 812),
       builder: (context, child) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: Routes.router,
-
         );
       },
     );
-
-
-
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
-import '../../../../core/routing.dart';
+import '../../../../core/routing/routing.dart';
 
 class YouDidItCard extends StatelessWidget {
   const YouDidItCard({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/helper/token_storage.dart';
-import 'package:intelligent_tutoring_system/core/routing.dart';
+import 'package:intelligent_tutoring_system/core/routing/routing.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/data/loginRepo/login_repo.dart';
 import '../../data/models/login_request_body.dart';
 import 'login_state.dart';

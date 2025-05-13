@@ -170,7 +170,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/dialogs.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/register/presentation/view/widgets/register_body.dart';
 
-import '../../../../../core/routing.dart';
+import '../../../../../core/routing/routing.dart';
 import '../cubit/register_cubit.dart';
 import '../cubit/register_state.dart';
 

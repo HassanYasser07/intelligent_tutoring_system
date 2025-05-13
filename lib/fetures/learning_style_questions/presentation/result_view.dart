@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/app_text_buttom.dart';
 
-import '../../../core/routing.dart';
+import '../../../core/routing/routing.dart';
 
 class ResultView extends StatelessWidget {
   final Map<String, dynamic> results;

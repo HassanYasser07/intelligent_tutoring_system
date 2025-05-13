@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intelligent_tutoring_system/fetures/welcome/presentation/view/widgets/image_logo.dart';
 import 'package:intelligent_tutoring_system/fetures/welcome/presentation/view/widgets/tittle.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
-import '../../../../core/routing.dart';
+import '../../../../core/routing/routing.dart';
 import '../../../../core/general_widgets/already_have_account.dart';
 import 'widgets/welcome_illustration.dart';
 import 'widgets/welcome_text.dart';

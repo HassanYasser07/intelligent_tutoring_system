@@ -17,27 +17,28 @@ import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/c
 import 'package:intelligent_tutoring_system/fetures/presentingLos/presentation/view/los_view.dart';
 import 'package:intelligent_tutoring_system/fetures/profile/data/repo/profile_repo.dart';
 import 'package:intelligent_tutoring_system/fetures/profile/presentation/cubit/profile_cubit.dart';
+import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/learned_topics_viev.dart';
 import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/profile%20view.dart';
 import 'package:intelligent_tutoring_system/fetures/spalsh/presentation/views/splash_view.dart';
-import 'package:intelligent_tutoring_system/fetures/topics/data/api_services/user_knowledge_api_services.dart' show UserKnowledgeApiServices;
-import 'package:intelligent_tutoring_system/fetures/topics/presentation/cubit/user_knowledge_cubit.dart' show UserKnowledgeCubit;
+import 'package:intelligent_tutoring_system/fetures/topics/data/api_services/user_knowledge_api_services.dart'
+    show UserKnowledgeApiServices;
+import 'package:intelligent_tutoring_system/fetures/topics/presentation/cubit/user_knowledge_cubit.dart'
+    show UserKnowledgeCubit;
 import 'package:intelligent_tutoring_system/fetures/topics/presentation/series_of_topics.dart';
 import 'package:intelligent_tutoring_system/fetures/welcome/presentation/view/welcome_screen.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../fetures/AUTH/login/presentation/login_view.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/data/api_services/api_services.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/data/models/goal_and_knowledge_base_response_model.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/data/repo/goal_and _knowledge_base_repo.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/presentation/cubit/shat_boot_cubit.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/presentation/view/presenting_base_goal.dart';
-import '../fetures/Getting_learning_goal_knowledge_base/presentation/view/shat_boot_view.dart';
-import '../fetures/profile/data/apiServices/profile_api_services.dart';
-import '../fetures/success/presentation/course_view.dart';
-import 'helper/shatboot_response_storage.dart';
-import 'helper/token_storage.dart';
-
-
+import '../../fetures/AUTH/login/presentation/login_view.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/data/api_services/api_services.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/data/models/goal_and_knowledge_base_response_model.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/data/repo/goal_and _knowledge_base_repo.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/presentation/cubit/shat_boot_cubit.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/presentation/view/presenting_base_goal.dart';
+import '../../fetures/Getting_learning_goal_knowledge_base/presentation/view/shat_boot_view.dart';
+import '../../fetures/profile/data/apiServices/profile_api_services.dart';
+import '../../fetures/success/presentation/course_view.dart';
+import '../helper/shatboot_response_storage.dart';
+import '../helper/token_storage.dart';
 
 /// The route configuration.
 
@@ -54,6 +55,7 @@ class Routes {
   static const kResultView = '/result';
   static const kPresentingBaseGoalView = '/presentingBaseGoalView';
   static const kProfileView = '/profileView';
+  static const kAllTopicsView = '/AllTopicsView';
 
   static final GoRouter router = GoRouter(
     initialLocation: '/',
@@ -72,10 +74,11 @@ class Routes {
                 final tokenService = TokenService();
                 await tokenService.verifyToken(token);
 
-               //  Check for saved LearningAnalysisResponse
-               // final prefs = await SharedPreferences.getInstance();
+                //  Check for saved LearningAnalysisResponse
+                // final prefs = await SharedPreferences.getInstance();
                 final prefsService = SharedPreferencesService();
-                final savedResponse = await  prefsService.getLearningAnalysisResponse();
+                final savedResponse =
+                    await prefsService.getLearningAnalysisResponse();
                 // Token is valid
                 if (savedResponse != null) {
                   return context.go(Routes.kTopicsView, extra: savedResponse);
@@ -186,7 +189,9 @@ class Routes {
       GoRoute(
         path: kPresentingBaseGoalView,
         builder: (BuildContext context, GoRouterState state) {
-          return  PresentingBaseGoalView(response: state.extra as LearningAnalysisResponse,);
+          return PresentingBaseGoalView(
+            response: state.extra as LearningAnalysisResponse,
+          );
         },
       ),
       GoRoute(
@@ -196,30 +201,35 @@ class Routes {
           return ResultView(results: results);
         },
       ),
-    GoRoute(
-  path: kProfileView,
-  builder: (context, state) {
-    return FutureBuilder(
-      future: AppStorage.getToken(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Scaffold(body: Center(child: Text("Not logged in")));
-        }
-        final email = JwtDecoder.decode(snapshot.data!)['email'];
-        return BlocProvider(
-          create: (_) => ProfileCubit(
-            ProfileRepo(
-              ProfileApiService(Dio()),
-            ),
-          )..getProfile(email),
-          child: const ProfileScreen(),
-        );
-      },
-    );
-  },
-),
-
-
+      GoRoute(
+        path: kProfileView,
+        builder: (context, state) {
+          return FutureBuilder(
+            future: AppStorage.getToken(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Scaffold(
+                    body: Center(child: Text("Not logged in")));
+              }
+              final email = JwtDecoder.decode(snapshot.data!)['email'];
+              return BlocProvider(
+                create: (_) => ProfileCubit(
+                  ProfileRepo(
+                    ProfileApiService(Dio()),
+                  ),
+                )..getProfile(email),
+                child: const ProfileScreen(),
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: kAllTopicsView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const LearnedTopicsView();
+        },
+      ),
     ],
   );
 }

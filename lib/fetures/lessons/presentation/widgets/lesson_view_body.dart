@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/general_widgets/custom_appBar.dart';
-import '../../../../core/routing.dart';
+import '../../../../core/routing/routing.dart';
 class LessonViewBody extends StatelessWidget {
   const LessonViewBody({super.key});
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/routing.dart';
+import '../../../../../../core/routing/routing.dart';
 import '../../../../../../core/theme/style.dart';
 void showSuccessDialog(BuildContext context) {
   showDialog(
