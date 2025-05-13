@@ -10,9 +10,9 @@ import '../cubit/los_cubit.dart';
 import '../cubit/los_states.dart';
 
 class LOsView extends StatefulWidget {
-
   final int loId;
   final String name;
+
   const LOsView({
     super.key,
     required this.loId,
@@ -24,8 +24,6 @@ class LOsView extends StatefulWidget {
 }
 
 class _LOsViewState extends State<LOsView> {
-
-
   int currentIndex = 0;
   late WebViewController controller;
 
@@ -45,12 +43,10 @@ class _LOsViewState extends State<LOsView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocBuilder<LOsCubit, LOsState>(
         builder: (context, state) {
-
           if (state is LOsLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -65,11 +61,17 @@ class _LOsViewState extends State<LOsView> {
           if (state is LOsSuccess) {
             return Column(
               children: [
-                CustomAppBar(title: 'Lesson ${currentIndex +1}',showBackButton: true,),
+                CustomAppBar(
+                  title: 'Lesson ${currentIndex + 1}',
+                  showBackButton: true,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/icons/Add a heading(16) 1.png',height: 120,),
+                    Image.asset(
+                      'assets/icons/Add a heading(16) 1.png',
+                      height: 120,
+                    ),
                     CustomPaint(
                       painter: SpeechBubblePainter(),
                       child: Container(
@@ -96,12 +98,12 @@ class _LOsViewState extends State<LOsView> {
                   ),
                 ),
                 if (currentIndex < state.response.subLos.length - 1)
-
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child:   CustomButton(
+                    child: CustomButton(
                       size: ButtonSize.large,
-                      label:  'Next: ${state.response.subLos[currentIndex + 1].name}',
+                      label:
+                          'Next: ${state.response.subLos[currentIndex + 1].name}',
                       variant: ButtonVariant.super_,
                       onPressed: () {
                         print('ID: ${widget.loId}');
@@ -118,21 +120,19 @@ class _LOsViewState extends State<LOsView> {
                 else
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child:   CustomButton(
+                    child: CustomButton(
                       size: ButtonSize.large,
                       label: 'Back to Topics',
                       variant: ButtonVariant.super_,
                       onPressed: () async {
-                       await SavedAllTopics().addString(widget.name);
-                       final saved = await SavedAllTopics().getStringList();
-                      print("📦 المواضيع المحفوظة حالياً: $saved");
-
-                        await CompletionLosHelper.markLoAsCompleted(widget.loId); // ✅
+                        await SavedAllTopics().addString(widget.name);
+                        final saved = await SavedAllTopics().getStringList();
+                        print("📦 المواضيع المحفوظة حالياً: $saved");
+                        await CompletionLosHelper.markLoAsCompleted(
+                            widget.loId); // ✅
                         Navigator.pop(context);
                       },
                     ),
-
-
                   ),
               ],
             );

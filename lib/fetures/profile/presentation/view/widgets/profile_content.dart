@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/widgets/profile_card.dart';
 
 import '../../../../../core/general_widgets/custom_appBar.dart';
 import '../../../data/models/profile_model.dart';
+import 'knowledge_base.dart';
 class ProfileContent extends StatefulWidget {
   final ProfileModel profile;
-  final GlobalKey<ScaffoldState> scaffoldKey; // أضف هذا
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
 
   const ProfileContent({super.key, required this.profile, required this.scaffoldKey});
@@ -27,7 +29,12 @@ class _ProfileContentState extends State<ProfileContent> {
             showBackButton: false,
             toggleDrawer: () => widget.scaffoldKey.currentState?.openDrawer(),
           ),
+          SizedBox(height: 16.h),
           ProfileCard(profile: widget.profile),
+          SizedBox(height: 16.h),
+          const KnowledgeBaseWidget(),
+          SizedBox(height: 16.h),
+
         ],
       ),
     );
