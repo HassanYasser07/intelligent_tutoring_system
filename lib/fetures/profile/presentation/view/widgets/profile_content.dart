@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/widgets/profile_card.dart';
+import 'package:intelligent_tutoring_system/fetures/profile/presentation/view/widgets/user_info_card.dart';
 
 import '../../../../../core/general_widgets/custom_appBar.dart';
 import '../../../data/models/profile_model.dart';
@@ -21,14 +22,14 @@ class _ProfileContentState extends State<ProfileContent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           CustomAppBar(
-            title: 'Learning Path',
+            title: 'Profile',
             showBackButton: false,
             toggleDrawer: () => widget.scaffoldKey.currentState?.openDrawer(),
           ),
+          UserInfoCard(name:widget.profile.name! , email:widget.profile.email! ),
           SizedBox(height: 16.h),
           ProfileCard(profile: widget.profile),
           SizedBox(height: 16.h),

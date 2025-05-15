@@ -23,42 +23,44 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFE2FFCC),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.green.shade700, // الأخضر الغامق
-            offset: const Offset(0, 5),   // من الأسفل فقط
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        children: [
-          const Text(
-            'Your Learning Style',
-            style: TextStyle(
-              color: Color(0xFF54BA07),
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFE2FFCC),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.green.shade700,
+              offset: const Offset(0, 5),
+              spreadRadius: 0,
             ),
-          ),
-          LearningStyleSection(profile: profile),
-          const SizedBox(height: 10),
-          CustomButton(
-            size: ButtonSize.large,
-            label: 'Restyle',
-            variant: ButtonVariant.super_,
-            onPressed: () async {
-              _clearCachedUserKnowledge();
-
-              await GoRouter.of(context).pushReplacement(Routes.kLearningStyleQuestionsView);
-            },
-          ),
-        ],
+          ],
+        ),
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          children: [
+            const Text(
+              'Your Learning Style',
+              style: TextStyle(
+                color: Color(0xFF54BA07),
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            LearningStyleSection(profile: profile),
+            const SizedBox(height: 10),
+            CustomButton(
+              size: ButtonSize.large,
+              label: 'Restyle',
+              variant: ButtonVariant.super_,
+              onPressed: () async {
+                _clearCachedUserKnowledge();
+                await GoRouter.of(context).pushReplacement(Routes.kLearningStyleQuestionsView);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
