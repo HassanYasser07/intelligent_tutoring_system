@@ -15,17 +15,15 @@ class LoadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            color: const Color(0xFF58CC02),
             'assets/icons/Add a heading(9) 1.png',
             height: 200.h,
             width: 200.w,
           ),
-          Image.asset(
-            'assets/icons/Loader.png',
-            height: 30.h,
-            width: 30.w,
-          ),
-
+          // Image.asset(
+          //   'assets/icons/Loader.png',
+          //   height: 30.h,
+          //   width: 30.w,
+          // ),
           SizedBox(height: 32.h),
           Text(
             'Analyzing Your inputs...',

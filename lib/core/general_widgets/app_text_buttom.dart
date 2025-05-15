@@ -109,8 +109,8 @@
 
 import 'package:flutter/material.dart';
 enum ButtonVariant {
-  locked,
   primary,
+  locked,
   secondary,
   secondaryOutline,
   primaryOutline,
@@ -182,9 +182,13 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
-          Icon(icon, size: 18),
+          Icon(
+              icon,
+              size: 24,
+              color: foregroundColor
+          ),
           const SizedBox(width: 8),
-          Text(label.toUpperCase(),textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 50)),
+          Text(label.toUpperCase(),textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
         ],
       )
           : Text(label.toUpperCase(),style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
@@ -242,6 +246,7 @@ class CustomButton extends StatelessWidget {
 
   Color _getForegroundColor(ButtonVariant variant) {
     switch (variant) {
+      case ButtonVariant.dangered:
       case ButtonVariant.primary:
       case ButtonVariant.secondary:
       case ButtonVariant.danger:

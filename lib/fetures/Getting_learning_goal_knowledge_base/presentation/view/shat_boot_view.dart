@@ -73,11 +73,11 @@ class ShatBootView extends StatelessWidget {
                       SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                        Padding(
                         padding: EdgeInsets.only(
-                          left: 140.w, // ✅ تم تحويله لـ responsive
-                          top: 60.h, // ✅
-                          bottom: 40.h, // ✅
+                          left: 140.w,
+                          top: 60.h,
+                          bottom: 40.h,
                         ),
-                        child: Text('Tell us what you know &\n where you wanna go',
+                        child: const Text('Tell us what you know &\n where you wanna go',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -87,24 +87,18 @@ class ShatBootView extends StatelessWidget {
       
       
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5, // ✅ خلي الارتفاع 85% من الشاشة مثلاً
+                        height: MediaQuery.of(context).size.height * 0.5,
 
                         child: Stack(
                           clipBehavior: Clip.none,
                           children: [
                             Positioned(
-                              bottom: MediaQuery.of(context).size.height * 0.38, // ✅ نسبة من الشاشة، بيشتغل كويس على كل الأجهزة
+                              bottom: MediaQuery.of(context).size.height * 0.38,
                               child: Image.asset(
                                 'assets/icons/kareem.png',
                                 height: 280.h,
                               ),
                             ),
-
-                            // Positioned(
-                            //     bottom: 270.h, // بدلاً من 235 (وتعدل حسب ما يناسب التصميم)
-                            //
-                            //     //  bottom: 235,
-                            //     child: Image.asset('assets/icons/kareem.png', height: 280.h)),
                             Container(
                               padding: EdgeInsets.all(20.w),
                               decoration: BoxDecoration(
@@ -113,48 +107,17 @@ class ShatBootView extends StatelessWidget {
                               ),
                               child: Column(
                                 children: [
-                                  Spacer(),
+                                  const Spacer(),
                                 const TextWidget(question: ' "What do you already know?"'),
                                   SizedBox(height: 12.h),
                                   ChatbotTextFormField(hintText: 'E.g. I know Python... (it\'s okay to leave blank)',controller: _knowledgeController,),
-                                  Spacer(),
+                                  const Spacer(),
                                   SizedBox(height: 24.h),
                                  const TextWidget(question:    "What's your tech goal?"),
                                   SizedBox(height: 12.h),
                                   ChatbotTextFormField(hintText: 'E.g. I want to build backend websites)',controller: _goalController,),
-                                  Spacer(),
+                                  const Spacer(),
 
-                                  // TextField(
-                                  //   controller: _goalController,
-                                  //   decoration: InputDecoration(
-                                  //     labelText: 'What do you want to learn?',
-                                  //     labelStyle: const TextStyle(
-                                  //       color: Colors.green, // لون الليبل
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //     border: OutlineInputBorder(
-                                  //       borderRadius: BorderRadius.circular(8),
-                                  //       borderSide: const BorderSide(
-                                  //         color: Colors.green, // اللون الافتراضي للإطار
-                                  //         width: 2,
-                                  //       ),
-                                  //     ),
-                                  //     focusedBorder: const OutlineInputBorder(
-                                  //       borderSide: BorderSide(
-                                  //         color: Colors.green, // لون الإطار عند التركيز
-                                  //         width: 2,
-                                  //       ),
-                                  //     ),
-                                  //     enabledBorder: const OutlineInputBorder(
-                                  //       borderSide: BorderSide(
-                                  //         color: Colors.grey,
-                                  //         // لون الإطار عند عدم التركيز
-                                  //         width: 1,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  //   maxLines: 2,
-                                  // ),
 
                                 ],
                               ),

@@ -74,7 +74,6 @@ class _LearningObjectItemState extends State<LearningObjectItem> {
                         ),
                   ),
                 );
-                // أعد البناء بعد الرجوع، إذا تم تحديث الحالة
                 if (result == true) {
                   (context as Element).markNeedsBuild(); // Force rebuild
                 }
@@ -129,8 +128,8 @@ class _LearningObjectItemState extends State<LearningObjectItem> {
                     ),
 
                     Positioned(
-                      left: 40 + iconX - iconSize / 2,
-                      top: 32 + iconY - iconSize / 2,
+                      left: 38 + iconX - iconSize / 2,
+                      top: 38 + iconY - iconSize / 2,
                       child: Container(
                         width: iconSize,
                         height: iconSize,
