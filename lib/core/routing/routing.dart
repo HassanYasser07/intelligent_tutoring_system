@@ -35,6 +35,7 @@ import '../../fetures/Getting_learning_goal_knowledge_base/data/repo/goal_and _k
 import '../../fetures/Getting_learning_goal_knowledge_base/presentation/cubit/shat_boot_cubit.dart';
 import '../../fetures/Getting_learning_goal_knowledge_base/presentation/view/presenting_base_goal.dart';
 import '../../fetures/Getting_learning_goal_knowledge_base/presentation/view/shat_boot_view.dart';
+import '../../fetures/learning_style_explanation/view/learning_style_explanation_view.dart';
 import '../../fetures/profile/data/apiServices/profile_api_services.dart';
 import '../../fetures/success/presentation/course_view.dart';
 import '../helper/shatboot_response_storage.dart';
@@ -56,6 +57,7 @@ class Routes {
   static const kPresentingBaseGoalView = '/presentingBaseGoalView';
   static const kProfileView = '/profileView';
   static const kAllTopicsView = '/AllTopicsView';
+  static const kLearningStyleExplanationView = '/LearningStyleExplanationView';
 
   static final GoRouter router = GoRouter(
     initialLocation: '/',
@@ -228,6 +230,12 @@ class Routes {
         path: kAllTopicsView,
         builder: (BuildContext context, GoRouterState state) {
           return const LearnedTopicsView();
+        },
+      ),
+      GoRoute(
+        path: kLearningStyleExplanationView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const LearningStyleExplanationView();
         },
       ),
     ],
