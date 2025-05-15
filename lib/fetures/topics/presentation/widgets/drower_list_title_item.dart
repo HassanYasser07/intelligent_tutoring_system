@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 class DrawerListTileItem extends StatelessWidget {
   const DrawerListTileItem({
     super.key,
@@ -31,10 +32,16 @@ class DrawerListTileItem extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontSize: 22.sp,
+            height: 1.1,
           ),
           title,
         ),
-        leading: SvgPicture.asset(icon,
+        leading: SizedBox(
+          height: 55.h,
+          width: 55.w,
+          child: SvgPicture.asset(
+            icon,
+          ),
         ),
         trailing: trailing,
       ),
