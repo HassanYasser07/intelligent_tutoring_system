@@ -20,9 +20,7 @@ class ResultView extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Stack(
-
             children: [
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -32,30 +30,26 @@ class ResultView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Container(
-                              padding: const EdgeInsets.all(16),
+                              padding:  EdgeInsets.all(16.r),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF58CC02),
-                                borderRadius: BorderRadius.circular(50),
+                                borderRadius: BorderRadius.circular(50.r),
                               ),
-                              child: Row(
+                              child:  Row(
                                 children: [
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: 12),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: const [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "You've unlocked your  brain's \n learning style!",
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
+                                      children: [
+                                        Text(
+                                          "You've unlocked your  brain's \n learning style!",
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         SizedBox(height: 4),
                                         Text(
@@ -68,6 +62,7 @@ class ResultView extends StatelessWidget {
                                       ],
                                     ),
                                   ),
+
                                 ],
                               ),
                             ),
@@ -77,23 +72,25 @@ class ResultView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                   SizedBox(height: 16.h),
                   Row(
                     children: [
                       Expanded(
                         child: _buildResultSection(
                             'Active',
-
                             results['activeReflectiveResult'].toString(),
                             'assets/icons/1.png',
-                        "You like jumping into action and learning through experience."),
+                     //   "You like jumping into action and learning through experience."
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _buildResultSection(
                             'Reflective',
                             results['reflectiveResult'].toString(),
-                            'assets/icons/2.png','You enjoy learning by watching, reading, or thinking things through.'),
+                            'assets/icons/2.png',
+                            //'You enjoy learning by watching, reading, or thinking things through.'
+                        ),
                       ),
                     ],
                   ),
@@ -104,14 +101,18 @@ class ResultView extends StatelessWidget {
                         child: _buildResultSection(
                             'Visual',
                             results['visualVerbalResult'].toString(),
-                            'assets/icons/3.png','You remember things you see more than things you hear.'),
+                            'assets/icons/3.png',
+                           // 'You remember things you see more than things you hear.'
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _buildResultSection(
                             'Verbal',
                             results['verbalResult'].toString(),
-                            'assets/icons/4.png','You love words, explanations, and storytelling.'),
+                            'assets/icons/4.png',
+                          //  'You love words, explanations, and storytelling.'
+                        ),
                       ),
                     ],
                   ),
@@ -122,14 +123,18 @@ class ResultView extends StatelessWidget {
                         child: _buildResultSection(
                             'Sensing',
                             results['sensingIntuitiveResult'].toString(),
-                            'assets/icons/5.png','You like learning things that are practical and grounded.'),
+                            'assets/icons/5.png',
+                         //   'You like learning things that are practical and grounded.'
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: _buildResultSection(
                             'Intuitive',
                             results['sensingResult'].toString(),
-                            'assets/icons/6.png','You like patterns, innovation, and thinking outside the box.'),
+                            'assets/icons/6.png',
+                           // 'You like patterns, innovation, and thinking outside the box.'
+                        ),
                       ),
                     ],
                   ),
@@ -140,14 +145,18 @@ class ResultView extends StatelessWidget {
                         child: _buildResultSection(
                             'Sequential',
                             results['sequentialGlobalResult'].toString(),
-                            'assets/icons/7.png','You prefer clear order, instructions, and building knowledge gradually.'),
+                            'assets/icons/7.png',
+                         //   'You prefer clear order, instructions, and building knowledge gradually.'
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: _buildResultSection(
                             'Global',
                             results['globalResult'].toString(),
-                            'assets/icons/8.png','You often make connections and “get it” once you understand the whole idea.'),
+                            'assets/icons/8.png',
+                         //   'You often make connections and “get it” once you understand the whole idea.'
+                             ),
                       ),
                     ],
                   ),
@@ -162,12 +171,23 @@ class ResultView extends StatelessWidget {
                       }),
                 ],
               ),
+              // Positioned(
+              //   right: 0,
+              //   top: -5.h, // Use .h for responsive top offset
+              //   child: Image.asset(
+              //     'assets/icons/tarek.png',
+              //     height: 130.h, // Adjust this to be responsive
+              //     width: 120.w,  // Optional: Add width for aspect ratio control
+              //     fit: BoxFit.contain, // Or BoxFit.cover based on your image
+              //   ),
+              // ),
+
               Positioned(
-                right: 0,
-                top: -5,
+                right: 10,
+                top: 0,
                 child: Image.asset(
                   'assets/icons/tarek.png',
-                  height: 150.h,
+                  height: 111.h,
                 ),
               ),
             ],
@@ -177,7 +197,7 @@ class ResultView extends StatelessWidget {
     );
   }
 
-  Widget _buildResultSection(String title, String result, String imgUrl,String description) {
+  Widget _buildResultSection(String title, String result, String imgUrl,) {
     // Convert string to double, default to 0.0 if conversion fails
     final double resultValue = double.tryParse(result) ?? 0.0;
 
@@ -202,10 +222,10 @@ class ResultView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(description,style: TextStyle(
-              color: Color(0xFF58CC02)
-            ),
-            ),
+            // Text(description,style: TextStyle(
+            //   color: Color(0xFF58CC02)
+            // ),
+            // ),
             Row(
               children: [
                 Expanded(
