@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/routing/routing.dart';
-import '../../../../../../core/theme/style.dart';
-
-void showSuccessDialog(BuildContext context) {
+import '../../../../../core/routing/routing.dart';
+import '../../../../../core/theme/style.dart';
+void showSuccessLoginDialog(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false, // Prevent dismissing by tapping outside
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Signup Successful'),
+        title: const Text('Login Successful'),
         content: const SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('Congratulations, you have signed up successfully!'),
+              Text('Congratulations, you have Logged in successfully!'),
             ],
           ),
         ),
@@ -36,8 +35,8 @@ void showSuccessDialog(BuildContext context) {
       );
     },
   );
- }
-void setupErrorState(BuildContext context, String error) {
+}
+void setupErrorLoginState(BuildContext context, String error) {
   String userFriendlyMessage;
 
   if (error.contains('401') || error.toLowerCase().contains('unauthorized')) {
@@ -78,34 +77,3 @@ void setupErrorState(BuildContext context, String error) {
     ),
   );
 }
-//
-//
-// void setupErrorState(BuildContext context, String error) {
-//   showDialog(
-//     context: context,
-//     builder: (context) => AlertDialog(
-//       icon: const Icon(
-//         Icons.error,
-//         color: Colors.red,
-//         size: 32,
-//       ),
-//       content: Text(
-//         error,
-//         style: Styles.font15DarkBlueMedium,
-//       ),
-//       actions: [
-//         TextButton(
-//           onPressed: () {
-//             Navigator.of(context).pop();
-//           }, // Just close the dialog
-//           child: const Text(
-//             'Got it',
-//             style: TextStyle(
-//               color: Colors.green,
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }

@@ -7,6 +7,7 @@ import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/cubi
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/cubit/login_state.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/widgerts/email_and_password.dart';
 import 'package:intelligent_tutoring_system/core/general_widgets/already_have_account.dart';
+import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/widgerts/login_dialogs.dart';
 import 'package:intelligent_tutoring_system/fetures/AUTH/login/presentation/widgerts/login_logo.dart';
 import '../../../../core/general_widgets/app_text_buttom.dart';
 
@@ -14,19 +15,18 @@ class LoginView extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  LoginView({Key? key}) : super(key: key);
+  LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            showSuccessDialog(context);
+            showSuccessLoginDialog(context);
           } else if (state is LoginError) {
-            setupErrorState(context, state.message);
+            setupErrorLoginState(context, state.message);
           }
         },
         builder: (context, state) {
@@ -76,7 +76,7 @@ class LoginView extends StatelessWidget {
                               const CircularProgressIndicator()
                             else
                               FractionallySizedBox(
-                                widthFactor: 0.99, // 80% من عرض الشاشة
+                                widthFactor: 0.99,
                                 child: CustomButton(
                                   label: "Login",
                                   variant: ButtonVariant.secondary,
@@ -120,12 +120,12 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(error),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
+  // void setupErrorState(BuildContext context, String error) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(error),
+  //       backgroundColor: Colors.red,
+  //     ),
+  //   );
+  // }
 }
