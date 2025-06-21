@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # intelligent_tutoring_system
 
 # 📱 Codingo Mobile App – Intelligent Tutoring System
@@ -63,6 +62,15 @@ This Intelligent Tutoring System (ITS) is designed to revolutionize personalized
 
 > 🔗 **Backend Repository**: [Codingo Backend on GitHub](https://github.com/Tarek-Saad/IIA)
 
+## 🧪 Demo and Presentation
+
+* 🎥 *Demo Video:* [Link](https://drive.google.com/file/d/1PU-XnxljKAfzq-ISgxyakUZ2cDXJJDqv/view?usp=drivesdk)
+
+* 📊 *Final Project Presentation:*
+  [📎 Canva Link](https://www.canva.com/design/DAGqAd_vihQ/cF8acxNWvwT_8B4sjQzE1Q/edit?utm_content=DAGqAd_vihQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+* 📚 *Full Documentation:*
+  [📄 Codingo Final Book (PDF)](https://drive.google.com/file/d/1IFTYK0Q1CGIythuggzzv1zxq13GOVo0J/view?usp=sharing)
 
 ### Installation
 1. Clone the repository:
