@@ -13,66 +13,61 @@ This is the official **Flutter-based mobile application** for **Codingo**, a sma
 
 ## 🎯 Project Overview
 
-**Codingo** redefines how programming is taught by combining:
+This Intelligent Tutoring System (ITS) is designed to revolutionize personalized learning by adapting to individual student's learning styles and goals. The system implements a clean architecture approach for maintainable and scalable code.
 
-- 📈 **Graph Theory** for concept sequencing  
-- 🧬 **Improved Immune Algorithm (IIA)** for personalized path generation  
-- 🧠 **Felder–Silverman Learning Style Model (FSLSM)** for cognitive alignment  
+## ✨ Key Features
 
-Unlike traditional e-learning apps, Codingo adapts the content **per learner** and presents it through:
+### Core Functionality
+- *Learning Style Assessment*: Personalized questionnaires to determine student learning preferences
+- *Adaptive Learning Paths*: Custom content delivery based on learning styles
+- *Knowledge Base Integration*: Comprehensive learning goal management
+- *chatbot*: Get input from learners to determine knowledge base and learning goals
+- *Topic-based Learning*: Organized educational content by topics
+- *Learning Objects (LOs)*: Modular educational content delivery
 
-- A visually engaging, game-like interface  
-- Dynamic learning object selection  
-- Real-time progress tracking and evaluation  
+### User Experience
+- *Authentication System*: Secure user registration and login
+- *User Profiles*: Personalized user experience management
+- *Welcome & Onboarding*: Guided introduction to the platform
+- *Progress Tracking*: Success monitoring and achievement system
+- *Splash Screen*: Polished app initialization experience
 
----
+## 🏗 Technical Architecture
 
-## 📲 App Features
+### Clean Architecture Implementation (without domain layer)
 
-- ✅ Learner onboarding and registration  
-- 🧠 FSLSM quiz to detect cognitive style  
-- 📘 Choose a track or be guided through CS50  
-- 📊 Dynamic learning path tailored to your style  
-- 📦 Explore diversified learning objects (videos, quizzes, demos)  
-- 🎯 Final exam gates for unit progression  
-- 🏆 Gamified visuals inspired by Duolingo  
 
----
+## 🛠️ Technical Stack
 
-## 🧠 How the Algorithm Works
+- **Framework**: Flutter & Dart  
+- **Architecture Pattern**: Clean Architecture (feature-first, no domain layer)  
+- **State Management**: Cubit pattern using `freezed` for immutable states  
+- **Routing**: `go_router` for declarative and nested navigation  
+- **Screen Adaptation**: `flutter_screenutil` for responsive UI  
+- **Networking**:  
+  - `retrofit` for type-safe HTTP requests  
+  - `retrofit_generator` for code generation  
+- **Code Generation**:  
+  - `freezed`, `freezed_annotation` for data classes and union types  
+  - `json_serializable`, `json_annotation` for JSON serialization
 
-The mobile app connects to a backend engine that uses an **Improved Immune Algorithm** to generate personalized learning paths.
 
-🔗 [IIA Algorithm Repository](https://github.com/Tarek-Saad/IIA)
+## 🚀 Getting Started
 
----
+### 🧰 Prerequisites
 
-## 🔐 Authentication & Learner Module
+- Flutter SDK (latest stable version)  
+- Dart SDK  
+- Android Studio or VS Code with Flutter plugins  
+- An active backend server (already hosted and accessible via HTTP)
 
-🔗 [Graduation Backend – Auth + FSLSM + Profile](https://github.com/Tarek-Saad/Graduation-learners-module-backend)  
+> 🔗 **Backend Repository**: [Codingo Backend on GitHub](https://github.com/Tarek-Saad/IIA)
 
-This module handles:
 
-- 🔒 Secure registration and login (JWT-based)  
-- 🧩 FSLSM quiz scoring  
-- 🎯 Learner goal and knowledge base input  
-- 🔗 API connection to the IIA Engine  
-
----
-
-## 🧩 System Architecture
-
-```text
-[ Flutter App ]
-    ↓
-[ Flask Backend ]
-    ├─ Learner Module (FSLSM, Auth)
-    ├─ IIA Engine (This Repo)
-    ↓
-[ Databases ]
-    ├─ Neo4j: Concept Graph (DAG)
-    ├─ MongoDB: FSLSM Questionnaire
-    └─ PostgreSQL: User Data, Results, Feedback
+### Installation
+1. Clone the repository:
+```bash
+git clone [repository-url]
 
 # intelligent_tutoring_system
 >>>>>>> b06aa2e7a5a76c88fae2a55ac25a2d8f803d40d3
